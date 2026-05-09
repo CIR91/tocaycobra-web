@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Toca y Cobra: el POS más simple para tu restaurante mexicano. Cobra rápido, controla todo desde WhatsApp. Sin internet, sin complicaciones.">
+<meta name="keywords" content="punto de venta restaurante méxico, POS taquería, software restaurante mexicano, sistema cobro mesero, app cocina KDS">
+<meta property="og:title" content="Toca y Cobra — POS para restaurantes mexicanos">
+<meta property="og:description" content="Cobra rápido. Controla tu restaurante desde WhatsApp. Funciona sin internet.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<title>Toca y Cobra — POS para restaurantes mexicanos</title>
+<style>
+:root {
+  --orange: #FF6B35;
+  --orange-dark: #E5562C;
+  --yellow: #FFB627;
+  --cream: #FFF7ED;
+  --ink: #1A1A1A;
+  --ink-soft: #4A4A4A;
+  --ink-muted: #888;
+  --line: #EEE;
+  --green: #16A34A;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ===== Layout ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== Header ===== */
+.header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 16px 0;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
+  font-size: 16px;
+}
+.nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav a {
+  font-weight: 500;
+  color: var(--ink-soft);
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.nav a:hover { color: var(--ink); }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255,107,53,0.3);
+}
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255,107,53,0.4);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.btn-ghost:hover { background: var(--cream); }
+.btn-large { padding: 16px 32px; font-size: 17px; }
+
+@media (max-width: 720px) {
+  .nav { display: none; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  padding: 80px 0 100px;
+  background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.eyebrow {
+  display: inline-block;
+  background: rgba(255,107,53,0.1);
+  color: var(--orange-dark);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+.hero h1 {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+  margin-bottom: 20px;
+}
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 19px;
+  color: var(--ink-soft);
+  margin-bottom: 32px;
+  line-height: 1.55;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-trust {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.check::before {
+  content: "✓";
+  color: var(--green);
+  font-weight: 800;
+}
+
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  border-radius: 28px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 24px 60px rgba(255,107,53,0.25);
+}
+.mock-screen {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.mock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.mock-header strong { font-size: 14px; }
+.mock-status {
+  background: var(--green);
+  color: white;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.mock-amount {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 8px 0;
+}
+.mock-label { font-size: 12px; color: var(--ink-muted); }
+.mock-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.mock-row:last-child { border-bottom: none; }
+.mock-btn {
+  background: var(--orange);
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+@media (max-width: 920px) {
+  .hero { padding: 56px 0 70px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 38px; }
+  .hero-sub { font-size: 17px; }
+  .hero-visual { aspect-ratio: auto; padding: 32px; }
+}
+
+/* ===== Section base ===== */
+.section {
+  padding: 96px 0;
+}
+.section-cream { background: var(--cream); }
+.section-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 64px;
+}
+.section-eyebrow {
+  display: inline-block;
+  color: var(--orange-dark);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-head h2 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.section-head p {
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+  .section { padding: 64px 0; }
+  .section-head h2 { font-size: 30px; }
+  .section-head p { font-size: 16px; }
+}
+
+/* ===== Features ===== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+.feature h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.feature p {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+@media (max-width: 920px) {
+  .features { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ===== How it works ===== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  position: relative;
+}
+.step {
+  text-align: center;
+  padding: 0 16px;
+}
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: white;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.step h3 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.step p {
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+@media (max-width: 920px) {
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ===== Pricing teaser ===== */
+.pricing-teaser {
+  background: linear-gradient(135deg, var(--ink) 0%, #2A2A2A 100%);
+  color: white;
+  padding: 72px 48px;
+  border-radius: 24px;
+  text-align: center;
+}
+.pricing-teaser h2 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  margin-bottom: 16px;
+}
+.pricing-teaser p {
+  font-size: 18px;
+  opacity: 0.85;
+  margin-bottom: 32px;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tier {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: left;
+}
+.tier-name {
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+.tier-price {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.tier-price span {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+.tier-desc {
+  font-size: 13px;
+  opacity: 0.8;
+}
+.tier-featured {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  border: none;
+  color: white;
+}
+.tier-featured .tier-desc { opacity: 0.95; }
+
+@media (max-width: 720px) {
+  .pricing-teaser { padding: 48px 24px; }
+  .pricing-teaser h2 { font-size: 28px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== CTA Form ===== */
+.cta-form {
+  background: white;
+  border-radius: var(--radius);
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  max-width: 480px;
+  margin: 0 auto;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+}
+.cta-form input {
+  flex: 1;
+  border: none;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  background: transparent;
+  outline: none;
+  color: var(--ink);
+}
+.cta-form .btn {
+  flex-shrink: 0;
+}
+.form-msg {
+  margin-top: 16px;
+  font-size: 14px;
+  min-height: 20px;
+}
+.form-msg.success { color: var(--yellow); }
+.form-msg.error { color: #FF8E8E; }
+
+@media (max-width: 540px) {
+  .cta-form { flex-direction: column; }
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--ink);
+  color: white;
+  padding: 56px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+}
+.footer-brand p {
+  opacity: 0.7;
+  font-size: 14px;
+  max-width: 360px;
+  margin-top: 12px;
+}
+.footer h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+.footer ul { list-style: none; }
+.footer li { margin-bottom: 8px; font-size: 15px; }
+.footer li a { opacity: 0.85; transition: opacity 0.2s; }
+.footer li a:hover { opacity: 1; }
+.footer-bottom {
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  opacity: 0.6;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ===== Animations ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero h1, .hero-sub, .hero-actions { animation: fadeUp 0.6s ease-out backwards; }
+.hero-sub { animation-delay: 0.1s; }
+.hero-actions { animation-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">TC</span>
+      <span>Toca y Cobra</span>
+    </a>
+    <nav class="nav">
+      <a href="#features">Funciones</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#planes">Planes</a>
+      <a href="#lista-espera" class="btn btn-primary">Lista de espera</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow">🇲🇽 Hecho en México · Lanzamiento 2026</span>
+      <h1>
+        Cobra rápido.<br>
+        Controla tu restaurante <span class="accent">desde WhatsApp</span>.
+      </h1>
+      <p class="hero-sub">
+        El punto de venta más simple para taquerías, fondas y cafeterías mexicanas.
+        Funciona sin internet. Tu cajero lo entiende en 10 minutos. Tú lo controlas
+        sin estar ahí.
+      </p>
+      <div class="hero-actions">
+        <a href="#lista-espera" class="btn btn-primary btn-large">Únete a la lista de espera</a>
+        <a href="#features" class="btn btn-ghost btn-large">Ver cómo funciona</a>
+      </div>
+      <div class="hero-trust">
+        <span class="check">Sin contratos</span>
+        <span class="check">14 días gratis</span>
+        <span class="check">Soporte en español</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="mock-screen">
+        <div class="mock-header">
+          <strong>Mesa 5 · Pedro</strong>
+          <span class="mock-status">EN COCINA</span>
+        </div>
+        <div class="mock-label">Total a cobrar</div>
+        <div class="mock-amount">$185.<span style="font-size:24px">00</span></div>
+        <div class="mock-row"><span>3× Tacos al pastor</span><span>$105</span></div>
+        <div class="mock-row"><span>2× Coca cola</span><span>$50</span></div>
+        <div class="mock-row"><span>1× Quesadilla</span><span>$30</span></div>
+        <div class="mock-btn">💵 Pago exacto $185</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Lo que vas a usar todos los días</span>
+      <h2>Lo más simple del mercado.<br>Lo más completo de tu lado.</h2>
+      <p>Todo lo que necesitas para operar tu restaurante. Nada de lo que no.</p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">📱</div>
+        <h3>Funciona sin internet</h3>
+        <p>
+          Tu sistema opera 100% en tu WiFi local. Aunque se caiga el internet,
+          sigues vendiendo, cobrando, imprimiendo. Sincroniza solito cuando regresa.
+        </p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>Control desde WhatsApp</h3>
+        <p>
+          Mira ventas en vivo, recibe corte de turno, alertas y actúa
+          desde el WhatsApp que ya usas. Sin abrir otra app, sin pagar dashboards
+          extra.
+        </p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🪑</div>
+        <h3>Equipo coordinado en tu LAN</h3>
+        <p>
+          Caja, mesero y cocina trabajan en tablets distintas con un solo plan.
+          El mesero pide, cocina ve el ticket en pantalla, caja cobra. Sin
+          tickets perdidos, sin gritos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section class="section section-cream" id="como-funciona">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">3 pasos para arrancar</span>
+      <h2>Tu primera venta en 60 segundos</h2>
+      <p>Sin instalación complicada, sin capacitación, sin manual.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Descarga la app</h3>
+        <p>Instala Toca y Cobra en tu tablet desde Google Play. Configura tu
+        negocio en 60 segundos.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Crea tu primer producto</h3>
+        <p>Nombre, precio, categoría. Listo. Si quieres receta, costos, variantes,
+        las activas cuando las necesites.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Empieza a cobrar</h3>
+        <p>Toca el producto, toca cobrar, imprime ticket. Si hay tabletas extra
+        para mesero o cocina, las pareas con un QR.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="planes">
+  <div class="container">
+    <div class="pricing-teaser">
+      <h2>Planes pensados para negocios mexicanos</h2>
+      <p>Empieza gratis. Cuando crezcas, escala con nosotros.</p>
+
+      <div class="pricing-grid">
+        <div class="tier">
+          <div class="tier-name">Solo</div>
+          <div class="tier-price">$0 <span>/ mes</span></div>
+          <div class="tier-desc">Para arrancar. 1 dispositivo, productos
+          ilimitados, ticket impreso.</div>
+        </div>
+        <div class="tier tier-featured">
+          <div class="tier-name">Equipo</div>
+          <div class="tier-price">$99 <span>MXN / mes</span></div>
+          <div class="tier-desc">Multi-dispositivo, KDS de cocina, control por
+          WhatsApp, reportes avanzados.</div>
+        </div>
+        <div class="tier">
+          <div class="tier-name">Cadena</div>
+          <div class="tier-price">$199 <span>MXN / mes</span></div>
+          <div class="tier-desc">Multi-sucursal, facturación CFDI,
+          predicción de demanda, soporte prioritario.</div>
+        </div>
+      </div>
+
+      <a href="#lista-espera" class="btn btn-primary btn-large">Reserva tu acceso temprano</a>
+    </div>
+  </div>
+</section>
+
+<!-- LISTA DE ESPERA -->
+<section class="section section-cream" id="lista-espera">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Lanzamiento 2026</span>
+      <h2>Sé de los primeros en usarlo</h2>
+      <p>Únete a la lista de espera y obtén <strong>3 meses gratis</strong> del plan
+      Equipo cuando lancemos.</p>
+    </div>
+
+    <form class="cta-form" id="waitlist-form">
+      <input
+        type="email"
+        name="email"
+        placeholder="tu@correo.com"
+        required
+        autocomplete="email"
+      >
+      <button type="submit" class="btn btn-primary">Apartar mi lugar</button>
+    </form>
+    <div class="form-msg" id="form-msg" style="text-align:center"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:white">
+          <span class="logo-mark">TC</span>
+          <span>Toca y Cobra</span>
+        </div>
+        <p>El POS más simple para tu restaurante mexicano. Hecho con cariño en México.</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="#features">Funciones</a></li>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#planes">Planes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="mailto:soporte@tocaycobra.club">soporte@tocaycobra.club</a></li>
+          <li><a href="#">Soporte WhatsApp (próximamente)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Toca y Cobra · Todos los derechos reservados</span>
+      <span>v1.0 · Hecho en México 🇲🇽</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const form = document.getElementById('waitlist-form');
+const msg = document.getElementById('form-msg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = form.email.value.trim();
+  if (!email) return;
+
+  const button = form.querySelector('button');
+  button.disabled = true;
+  button.textContent = 'Enviando…';
+
+  // Por ahora guardamos en localStorage; cuando tengamos backend Cloudflare,
+  // esto se reemplaza por fetch a /api/waitlist.
+  try {
+    const list = JSON.parse(localStorage.getItem('waitlist') || '[]');
+    if (list.includes(email)) {
+      msg.textContent = '¡Ya estás en la lista! Te avisaremos pronto.';
+      msg.className = 'form-msg success';
+    } else {
+      list.push(email);
+      localStorage.setItem('waitlist', JSON.stringify(list));
+      msg.textContent = '✓ Listo. Te avisamos cuando lancemos.';
+      msg.className = 'form-msg success';
+      form.email.value = '';
+    }
+  } catch (err) {
+    msg.textContent = 'Algo falló. Escríbenos a soporte@tocaycobra.club.';
+    msg.className = 'form-msg error';
+  }
+
+  button.disabled = false;
+  button.textContent = 'Apartar mi lugar';
+
+  setTimeout(() => { msg.textContent = ''; msg.className = 'form-msg'; }, 6000);
+});
+</script>
+
+</body>
+</html>
