@@ -1,3 +1,21 @@
+# Permite explícitamente bots de Facebook/Meta
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Permite bots de Google y otros buscadores
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Permite todo lo demás
 User-agent: *
 Allow: /
 
