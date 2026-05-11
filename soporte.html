@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Centro de ayuda de Toca y Cobra — preguntas frecuentes y contacto de soporte.">
+<title>Soporte — Toca y Cobra</title>
+<style>
+:root {
+  --orange: #FF6B35;
+  --orange-dark: #E5562C;
+  --yellow: #FFB627;
+  --cream: #FFF7ED;
+  --ink: #1A1A1A;
+  --ink-soft: #4A4A4A;
+  --ink-muted: #888;
+  --line: #EEE;
+  --green: #16A34A;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+.header {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100; padding: 16px 0;
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; }
+.logo { font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 8px; }
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: 16px;
+}
+.nav { display: flex; gap: 32px; align-items: center; }
+.nav a { font-weight: 500; color: var(--ink-soft); font-size: 15px; transition: color 0.2s; }
+.nav a:hover { color: var(--ink); }
+.nav a.active { color: var(--orange); }
+@media (max-width: 720px) { .nav { display: none; } }
+
+.page-hero {
+  background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
+  padding: 72px 0 56px;
+  text-align: center;
+}
+.page-hero .eyebrow {
+  display: inline-block;
+  background: rgba(255,107,53,0.1);
+  color: var(--orange-dark);
+  font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 16px;
+}
+.page-hero h1 { font-size: 44px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.15; }
+.page-hero p { font-size: 18px; color: var(--ink-soft); max-width: 560px; margin: 0 auto; }
+@media (max-width: 720px) { .page-hero h1 { font-size: 30px; } .page-hero p { font-size: 16px; } }
+
+.faq-section { padding: 80px 0; }
+.faq-container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+.faq-section h2 {
+  font-size: 30px; font-weight: 800; letter-spacing: -0.5px;
+  margin-bottom: 40px; text-align: center;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.faq-item:hover { box-shadow: var(--shadow-sm); }
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 20px 24px;
+  text-align: left;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.faq-question:hover { background: var(--cream); }
+.faq-chevron { color: var(--orange); font-size: 20px; font-weight: 400; flex-shrink: 0; transition: transform 0.2s; }
+.faq-answer {
+  display: none;
+  padding: 0 24px 20px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+.faq-answer.open { display: block; }
+.faq-answer ul { margin: 8px 0 0 20px; }
+.faq-answer li { margin-bottom: 4px; }
+
+.contact-section {
+  background: var(--cream);
+  padding: 80px 0;
+}
+.contact-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+.contact-inner h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+.contact-inner > p { font-size: 17px; color: var(--ink-soft); margin-bottom: 48px; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.contact-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.contact-icon { font-size: 36px; margin-bottom: 16px; }
+.contact-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.contact-card p { font-size: 14px; color: var(--ink-soft); margin-bottom: 16px; line-height: 1.5; }
+.contact-card a {
+  display: inline-block;
+  color: var(--orange-dark);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .faq-section h2 { font-size: 24px; }
+}
+
+.footer { background: var(--ink); color: white; padding: 56px 0 32px; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 40px;
+}
+.footer-brand p { opacity: 0.7; font-size: 14px; max-width: 260px; margin-top: 12px; line-height: 1.6; }
+.footer h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.5; margin-bottom: 16px; }
+.footer ul { list-style: none; }
+.footer li { margin-bottom: 8px; font-size: 15px; }
+.footer li a { opacity: 0.85; transition: opacity 0.2s; }
+.footer li a:hover { opacity: 1; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  display: flex; justify-content: space-between;
+  font-size: 13px; opacity: 0.5;
+}
+.logo-footer { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 8px; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; gap: 24px; } .footer-bottom { flex-direction: column; gap: 8px; } }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-mark">TC</span>
+        <span>Toca y Cobra</span>
+      </a>
+      <nav class="nav">
+        <a href="/#features">Funciones</a>
+        <a href="/#planes">Planes</a>
+        <a href="/soporte.html" class="active">Soporte</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Centro de ayuda</span>
+    <h1>¿En qué te ayudamos?</h1>
+    <p>Encuentra respuestas a las preguntas más comunes sobre Toca y Cobra.</p>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="faq-container">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo descargo Toca y Cobra?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Descarga Toca y Cobra gratis desde <strong>Google Play Store</strong> en cualquier dispositivo Android (versión 8.0 o superior). Busca "Toca y Cobra Restaurantes" o sigue el enlace directo desde tocaycobra.club.</p>
+        <p>Una vez instalada, abre la app, configura el nombre de tu negocio y listo — puedes empezar a vender en minutos.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Funciona sin internet?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p><strong>Sí, completamente.</strong> Toca y Cobra opera en tu red WiFi local. Puedes tomar pedidos, cobrar, imprimir tickets y ver reportes aunque tu internet se caiga o no tengas servicio.</p>
+        <p>Los datos se guardan en los dispositivos de tu negocio. Solo necesitas internet para descargar actualizaciones de la app.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cuánto cuesta?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Toca y Cobra tiene tres planes:</p>
+        <ul>
+          <li><strong>Plan Solo — GRATIS:</strong> 1 dispositivo, productos y ventas ilimitadas, reportes básicos.</li>
+          <li><strong>Plan Equipo — $99/mes:</strong> Multi-dispositivo, pantalla de cocina (KDS), reportes avanzados.</li>
+          <li><strong>Plan Cadena — $199/mes:</strong> Multi-sucursal, facturación CFDI, soporte prioritario.</li>
+        </ul>
+        <p><strong>Durante el período BETA (hasta agosto 2026): todos los planes son completamente gratis.</strong></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Puedo usarlo con mis tablets actuales?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Sí. Toca y Cobra funciona en cualquier tablet o celular Android con versión 8.0 o superior. No necesitas hardware especial.</p>
+        <p>Funciona bien en tablets económicas de $1,500–$2,500 MXN. Lo único que necesitas es una red WiFi en tu local.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo conecto mi impresora térmica?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Toca y Cobra se conecta a impresoras térmicas vía <strong>Bluetooth</strong>. Los pasos son:</p>
+        <ul>
+          <li>Enciende tu impresora y activa el Bluetooth en tu tablet.</li>
+          <li>En la app, ve a <strong>Ajustes → Impresora</strong>.</li>
+          <li>Busca y selecciona tu impresora de la lista.</li>
+          <li>Haz una prueba de impresión para confirmar.</li>
+        </ul>
+        <p>Funciona con impresoras XPrinter, MUNBYN, Bixolon, Epson y la mayoría de impresoras genéricas de 58mm y 80mm.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo conecto el celular del mesero al sistema?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>El mesero se conecta como dispositivo invitado (GUEST) a tu caja principal (HOST):</p>
+        <ul>
+          <li>En la caja principal: ve a <strong>Ajustes → Dispositivos</strong> y genera un código QR de invitación.</li>
+          <li>En el celular del mesero: abre Toca y Cobra, selecciona "Unirme a un restaurante" y escanea el QR.</li>
+          <li>Ambos dispositivos deben estar conectados al mismo WiFi.</li>
+        </ul>
+        <p>El mesero verá las mesas en tiempo real y sus pedidos llegarán directo a la pantalla de cocina.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Qué pasa si se cae el WiFi durante el servicio?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Si el WiFi se cae completamente, los dispositivos conectados perderán la sincronización entre sí. Sin embargo:</p>
+        <ul>
+          <li>La caja principal puede seguir tomando pedidos y cobrando de forma independiente.</li>
+          <li>Los datos de ventas ya registradas se conservan en el dispositivo.</li>
+          <li>Al restaurarse el WiFi, los dispositivos se reconectan automáticamente.</li>
+        </ul>
+        <p>Toca y Cobra está diseñado para WiFi local estable. Recomendamos un router de buena calidad en el local.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Cómo importo mi catálogo de productos?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Puedes agregar productos de dos formas:</p>
+        <ul>
+          <li><strong>Manual:</strong> en la app, ve a <strong>Catálogo → Agregar producto</strong>. Nombre, precio, categoría y listo.</li>
+          <li><strong>Importación por foto (Pulso):</strong> toma una foto de tu menú o carta y Toca y Cobra lo lee automáticamente usando inteligencia artificial. Revisa y ajusta antes de confirmar.</li>
+        </ul>
+        <p>Para negocios con más de 50 productos, la importación por foto es la opción más rápida.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Mis datos están seguros? ¿Toca y Cobra los ve?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p><strong>No.</strong> Todos los datos de tu negocio (productos, ventas, clientes, precios) se guardan <strong>exclusivamente en tus dispositivos</strong>. Toca y Cobra no tiene acceso a esta información.</p>
+        <p>Solo recopilamos tu correo de contacto si lo proporcionas para soporte o lista de espera. Consulta nuestra <a href="/privacidad.html">Política de Privacidad</a> para más detalles.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        ¿Toca y Cobra genera facturas CFDI?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>La facturación CFDI está disponible en el <strong>Plan Cadena</strong>. Durante el período BETA, esta función está en desarrollo activo.</p>
+        <p>Si necesitas facturación electrónica urgente, contáctanos — podemos orientarte sobre el estado actual de la función.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="contact-inner">
+    <h2>¿No encontraste tu respuesta?</h2>
+    <p>Nuestro equipo de soporte está aquí para ayudarte. Escríbenos y te respondemos rápido.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <h3>Correo electrónico</h3>
+        <p>Para dudas, reportes de problemas o solicitudes de funciones.</p>
+        <a href="mailto:soporte@tocaycobra.club">soporte@tocaycobra.club</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">💬</div>
+        <h3>WhatsApp Business</h3>
+        <p>Respuesta rápida para problemas urgentes durante el servicio.</p>
+        <a href="https://wa.me/524427126788">+52 1 442 712 6788</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">⏰</div>
+        <h3>Horario de atención</h3>
+        <p>Lunes a Viernes<br>9:00 am – 6:00 pm CDMX</p>
+        <a href="mailto:soporte@tocaycobra.club">Enviar mensaje</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-footer">
+          <span class="logo-mark">TC</span>
+          <span>Toca y Cobra</span>
+        </div>
+        <p>El POS más simple para tu restaurante mexicano. Hecho con cariño en México.</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <ul>
+          <li><a href="/#features">Funciones</a></li>
+          <li><a href="/#como-funciona">Cómo funciona</a></li>
+          <li><a href="/#planes">Planes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Soporte</h4>
+        <ul>
+          <li><a href="/soporte.html">Centro de ayuda</a></li>
+          <li><a href="mailto:soporte@tocaycobra.club">soporte@tocaycobra.club</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacidad.html">Privacidad</a></li>
+          <li><a href="/terminos.html">Términos</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Toca y Cobra · Todos los derechos reservados</span>
+      <span>Hecho en México 🇲🇽</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var chevron = btn.querySelector('.faq-chevron');
+  var isOpen = answer.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-answer').forEach(function(a) { a.classList.remove('open'); });
+  document.querySelectorAll('.faq-chevron').forEach(function(c) { c.textContent = '+'; c.style.transform = 'rotate(0deg)'; });
+  // Toggle clicked
+  if (!isOpen) {
+    answer.classList.add('open');
+    chevron.textContent = '×';
+    chevron.style.transform = 'rotate(0deg)';
+  }
+}
+</script>
+</body>
+</html>

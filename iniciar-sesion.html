@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar sesión — Toca y Cobra</title>
+<meta name="description" content="Accede a tu Dashboard Web de Toca y Cobra y revisa tus ventas en tiempo real desde cualquier lugar.">
+<link rel="icon" type="image/png" href="/icon_512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --toca-orange:#FF5A00;
+  --toca-orange-deep:#E94F00;
+  --toca-orange-soft:#FFF0E6;
+  --toca-orange-pale:#FFE4D2;
+  --toca-orange-border:#FFD0B8;
+  --warm-bg:#FFF9F4;
+  --cream-bg:#FDF5EF;
+  --surface-white:#FFFFFF;
+  --soft-border:#EFE4DA;
+  --divider:#F3E7DE;
+  --charcoal:#111827;
+  --slate:#4B5563;
+  --muted:#6B7280;
+  --light-gray:#9CA3AF;
+  --success:#16A34A;
+  --success-soft:#EAF7EF;
+  --warning:#F59E0B;
+  --warning-soft:#FFF4DE;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--charcoal);
+  background:var(--warm-bg);
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%;display:block}
+
+.top{padding:20px 24px;border-bottom:1px solid var(--divider);background:rgba(255,249,244,0.85);backdrop-filter:blur(10px)}
+.top-wrap{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:40px;height:40px;border-radius:10px;background:var(--toca-orange);display:flex;align-items:center;justify-content:center}
+.brand-name{font-weight:700;font-size:18px;letter-spacing:-0.02em}
+.back-link{color:var(--slate);font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}
+.back-link:hover{color:var(--toca-orange)}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 24px;position:relative;overflow:hidden}
+.decor{position:absolute;border-radius:50%;pointer-events:none}
+.decor-1{width:400px;height:400px;background:var(--toca-orange-pale);top:-100px;right:-100px;opacity:.45}
+.decor-2{width:280px;height:280px;background:var(--toca-orange-soft);bottom:-50px;left:-50px;opacity:.6}
+
+.card{
+  background:var(--surface-white);
+  border:1px solid var(--soft-border);
+  border-radius:24px;
+  padding:48px 40px;
+  max-width:460px;width:100%;
+  box-shadow:0 30px 60px -20px rgba(17,24,39,0.12);
+  position:relative;z-index:1;
+}
+.card-header{text-align:center;margin-bottom:32px}
+.icon-circle{
+  width:72px;height:72px;border-radius:20px;
+  background:linear-gradient(135deg,var(--toca-orange) 0%,var(--toca-orange-deep) 100%);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  box-shadow:0 12px 24px -8px rgba(255,90,0,0.4);
+}
+.card-header h1{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:8px}
+.card-header p{color:var(--slate);font-size:15px}
+
+.badge-soon{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:20px;
+  background:var(--warning-soft);
+  color:#A15600;
+  font-weight:600;font-size:13px;
+  margin-bottom:24px;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--warning);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.form-row{margin-bottom:16px}
+.label{display:block;font-size:13px;font-weight:600;color:var(--charcoal);margin-bottom:6px}
+.input{
+  width:100%;
+  padding:14px 16px;
+  border:1.5px solid var(--soft-border);
+  border-radius:12px;
+  font-family:inherit;font-size:15px;
+  background:var(--warm-bg);
+  color:var(--charcoal);
+  transition:border-color .15s, background .15s;
+}
+.input:focus{outline:none;border-color:var(--toca-orange);background:#fff}
+.input::placeholder{color:var(--light-gray)}
+.input:disabled{cursor:not-allowed;opacity:.7}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 22px;border-radius:14px;
+  font-weight:600;font-size:15px;
+  border:none;cursor:pointer;
+  font-family:inherit;
+  width:100%;
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+.btn-primary{background:var(--toca-orange);color:#fff;margin-top:8px}
+.btn-primary:hover:not(:disabled){background:var(--toca-orange-deep);transform:translateY(-1px);box-shadow:0 4px 12px rgba(255,90,0,0.25)}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed}
+
+.divider-row{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--muted);font-size:13px}
+.divider-row::before,.divider-row::after{content:"";flex:1;height:1px;background:var(--divider)}
+
+.note{
+  background:var(--cream-bg);
+  border:1px solid var(--divider);
+  border-radius:12px;
+  padding:16px;
+  display:flex;gap:12px;
+  align-items:flex-start;
+}
+.note-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--toca-orange-soft);display:flex;align-items:center;justify-content:center;color:var(--toca-orange)}
+.note-text{font-size:13px;color:var(--slate);line-height:1.5}
+.note-text strong{color:var(--charcoal)}
+.note-text a{color:var(--toca-orange);font-weight:600}
+
+.preview-list{margin-top:32px;text-align:left}
+.preview-list h3{font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.preview-list ul{list-style:none}
+.preview-list li{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:14px;color:var(--slate)}
+.preview-list li svg{flex-shrink:0;color:var(--success)}
+
+.footer-link{text-align:center;margin-top:24px;font-size:13px;color:var(--muted)}
+.footer-link a{color:var(--toca-orange);font-weight:600}
+
+@media (max-width:520px){
+  .card{padding:36px 24px;border-radius:18px}
+  .card-header h1{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="top-wrap">
+    <a href="/" class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 60 60" width="28" height="28">
+          <circle cx="30" cy="20" r="3" fill="#fff"/>
+          <rect x="28.5" y="22" width="3" height="2" fill="#fff"/>
+          <path d="M 14 42 L 14 40 A 16 16 0 0 1 46 40 L 46 42 Z" fill="#fff"/>
+          <rect x="11" y="42" width="38" height="3" rx="1.5" fill="#fff"/>
+        </svg>
+      </div>
+      <span class="brand-name">Toca y Cobra</span>
+    </a>
+    <a href="/" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Volver al inicio
+    </a>
+  </div>
+</div>
+
+<main>
+  <div class="decor decor-1"></div>
+  <div class="decor decor-2"></div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="icon-circle">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect x="6" y="8" width="24" height="18" rx="3" stroke="#fff" stroke-width="2"/>
+          <path d="M6 14h24" stroke="#fff" stroke-width="2"/>
+          <circle cx="12" cy="11" r="0.8" fill="#fff"/>
+          <circle cx="14.5" cy="11" r="0.8" fill="#fff"/>
+          <rect x="10" y="18" width="6" height="4" rx="1" fill="#fff" opacity="0.85"/>
+          <rect x="18" y="18" width="8" height="1.5" rx="0.5" fill="#fff" opacity="0.7"/>
+          <rect x="18" y="21" width="6" height="1.5" rx="0.5" fill="#fff" opacity="0.7"/>
+        </svg>
+      </div>
+      <h1>Inicia sesión en tu Dashboard</h1>
+      <p>Consulta tus ventas en tiempo real desde cualquier lugar.</p>
+    </div>
+
+    <div style="text-align:center">
+      <div class="badge-soon">
+        <span class="badge-dot"></span>
+        Dashboard Web disponible próximamente
+      </div>
+    </div>
+
+    <form onsubmit="return handleSubmit(event)">
+      <div class="form-row">
+        <label class="label" for="email">Correo electrónico</label>
+        <input type="email" id="email" class="input" placeholder="tu@correo.com" disabled>
+      </div>
+      <div class="form-row">
+        <label class="label" for="password">Contraseña</label>
+        <input type="password" id="password" class="input" placeholder="••••••••" disabled>
+      </div>
+      <button type="submit" class="btn btn-primary" disabled>Iniciar sesión</button>
+    </form>
+
+    <div class="divider-row">o</div>
+
+    <div class="note">
+      <div class="note-icon">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 4v3M7 9.5v.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="note-text">
+        <strong>El Dashboard Web está en desarrollo.</strong><br>
+        Mientras tanto, tus reportes están disponibles dentro de la app móvil.
+        Si quieres ser de los primeros en probar el dashboard cuando lance, escríbenos a <a href="mailto:soporte@tocaycobra.club">soporte@tocaycobra.club</a>.
+      </div>
+    </div>
+
+    <div class="preview-list">
+      <h3>Qué podrás hacer aquí</h3>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ver ventas del día, semana y mes en vivo</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productos más vendidos y stock bajo</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productividad por cajero y mesero</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Alertas cuando algo merezca tu atención</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Comparativas contra periodos anteriores</li>
+      </ul>
+    </div>
+
+    <div class="footer-link">
+      ¿No tienes la app aún? <a href="https://play.google.com/store">Descárgala gratis</a>
+    </div>
+  </div>
+</main>
+
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  return false;
+}
+</script>
+
+</body>
+</html>

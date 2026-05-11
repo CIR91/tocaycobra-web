@@ -3,802 +3,525 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="facebook-domain-verification" content="8uho8go5kp996y4ihiia9h4n34245a" />
-<meta name="description" content="Toca y Cobra: el POS más simple para tu restaurante mexicano. Funciona sin internet, multi-dispositivo, hecho en México. Lanzamiento 2026.">
-<meta name="keywords" content="punto de venta restaurante méxico, POS taquería, software restaurante mexicano, sistema cobro mesero, app cocina KDS">
-<meta property="og:title" content="Toca y Cobra — POS para restaurantes mexicanos">
-<meta property="og:description" content="El POS más simple para tu restaurante mexicano. Funciona sin internet. Lanzamiento 2026.">
+<meta name="facebook-domain-verification" content="8uho8go5kp996y4ihiia9h4n34245a">
+<title>Toca y Cobra — El POS más simple de México</title>
+<meta name="description" content="Punto de venta para restaurantes y tiendas. Sin curva de aprendizaje, funciona sin internet, reportes claros desde el primer ticket.">
+<meta property="og:title" content="Toca y Cobra — El POS más simple de México">
+<meta property="og:description" content="Cobra rápido. Sin curva de aprendizaje. Funciona sin internet.">
+<meta property="og:url" content="https://tocaycobra.com.mx">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
-<title>Toca y Cobra — POS para restaurantes mexicanos</title>
+<link rel="icon" type="image/png" href="/icon_512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --orange: #FF6B35;
-  --orange-dark: #E5562C;
-  --yellow: #FFB627;
-  --cream: #FFF7ED;
-  --ink: #1A1A1A;
-  --ink-soft: #4A4A4A;
-  --ink-muted: #888;
-  --line: #EEE;
-  --green: #16A34A;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.12);
-  --radius: 14px;
+:root{
+  --toca-orange:#FF5A00;
+  --toca-orange-deep:#E94F00;
+  --toca-orange-soft:#FFF0E6;
+  --toca-orange-pale:#FFE4D2;
+  --toca-orange-border:#FFD0B8;
+  --warm-bg:#FFF9F4;
+  --cream-bg:#FDF5EF;
+  --surface-white:#FFFFFF;
+  --surface-warm:#FFFCF9;
+  --soft-border:#EFE4DA;
+  --divider:#F3E7DE;
+  --charcoal:#111827;
+  --slate:#4B5563;
+  --muted:#6B7280;
+  --light-gray:#9CA3AF;
+  --success:#16A34A;
+  --success-soft:#EAF7EF;
+  --warning:#F59E0B;
+  --warning-soft:#FFF4DE;
+  --danger:#DC2626;
+  --danger-soft:#FDECEC;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--charcoal);background:var(--warm-bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  color: var(--ink);
-  background: #fff;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+nav{position:sticky;top:0;z-index:50;background:rgba(255,249,244,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--divider)}
+.nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-icon{width:40px;height:40px;border-radius:10px;background:var(--toca-orange);display:flex;align-items:center;justify-content:center}
+.brand-name{font-weight:700;font-size:18px;letter-spacing:-0.02em}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--slate);font-weight:500;font-size:15px;transition:color .15s}
+.nav-links a:hover{color:var(--toca-orange)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:24px;font-weight:600;font-size:15px;transition:transform .15s,box-shadow .15s;border:none;cursor:pointer}
+.btn-primary{background:var(--toca-orange);color:#fff}
+.btn-primary:hover{background:var(--toca-orange-deep);transform:translateY(-1px);box-shadow:0 4px 12px rgba(255,90,0,0.25)}
+.btn-secondary{background:var(--surface-white);color:var(--charcoal);border:1.5px solid var(--soft-border)}
+.btn-secondary:hover{border-color:var(--toca-orange-border)}
+.btn-large{padding:16px 32px;font-size:16px}
+@media (max-width:768px){.nav-links{display:none}}
 
-/* ===== Layout ===== */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+.hero{position:relative;padding:80px 0 100px;overflow:hidden}
+.hero-decor{position:absolute;border-radius:50%;pointer-events:none}
+.hero-decor-1{width:400px;height:400px;background:var(--toca-orange-pale);top:-100px;right:-100px;opacity:.55}
+.hero-decor-2{width:280px;height:280px;background:var(--toca-orange-soft);bottom:-50px;left:-50px;opacity:.7}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:20px;background:var(--toca-orange-soft);color:var(--toca-orange-deep);font-weight:600;font-size:13px;margin-bottom:20px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--toca-orange)}
+.hero h1{font-size:64px;font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:24px}
+.hero h1 .accent{color:var(--toca-orange)}
+.hero p.lead{font-size:20px;color:var(--slate);margin-bottom:32px;max-width:520px;line-height:1.6}
+.hero-ctas{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:32px}
+.hero-trust{display:flex;gap:20px;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.hero-trust-item{display:flex;align-items:center;gap:6px}
+.hero-trust-check{color:var(--success)}
+.tablet-mock{background:var(--charcoal);border-radius:24px;padding:14px;box-shadow:0 30px 60px -20px rgba(17,24,39,0.25);transform:rotate(2deg);transition:transform .4s ease}
+.tablet-mock:hover{transform:rotate(0deg)}
+.tablet-screen{background:#fff;border-radius:14px;overflow:hidden;aspect-ratio:16/10}
+@media (max-width:900px){.hero{padding:60px 0 80px}.hero-grid{grid-template-columns:1fr;gap:40px}.hero h1{font-size:44px}.hero p.lead{font-size:17px}}
 
-/* ===== Header ===== */
-.header {
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
-  z-index: 100;
-  padding: 16px 0;
-}
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo {
-  font-weight: 800;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.logo-mark {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 900;
-  font-size: 16px;
-}
-.nav {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-.nav a {
-  font-weight: 500;
-  color: var(--ink-soft);
-  font-size: 15px;
-  transition: color 0.2s;
-}
-.nav a:hover { color: var(--ink); }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  border-radius: var(--radius);
-  font-weight: 600;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
-  white-space: nowrap;
-}
-.btn-primary {
-  background: var(--orange);
-  color: white;
-  box-shadow: 0 4px 12px rgba(255,107,53,0.3);
-}
-.btn-primary:hover {
-  background: var(--orange-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(255,107,53,0.4);
-}
-.btn-ghost {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line);
-}
-.btn-ghost:hover { background: var(--cream); }
-.btn-large { padding: 16px 32px; font-size: 17px; }
+.trust{padding:32px 0;background:var(--cream-bg);border-top:1px solid var(--divider);border-bottom:1px solid var(--divider)}
+.trust-text{text-align:center;color:var(--muted);font-size:14px;font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.trust-row{display:flex;justify-content:center;gap:48px;margin-top:24px;flex-wrap:wrap;align-items:center}
+.trust-item{display:flex;align-items:center;gap:10px;color:var(--slate);font-weight:600;font-size:15px}
 
-@media (max-width: 720px) {
-  .nav { display: none; }
-}
+section{padding:100px 0}
+.section-header{text-align:center;margin-bottom:64px;max-width:680px;margin-left:auto;margin-right:auto}
+.section-header h2{font-size:44px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px}
+.section-header p{font-size:18px;color:var(--slate);line-height:1.6}
 
-/* ===== Hero ===== */
-.hero {
-  padding: 80px 0 100px;
-  background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
-  position: relative;
-  overflow: hidden;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 64px;
-  align-items: center;
-}
-.eyebrow {
-  display: inline-block;
-  background: rgba(255,107,53,0.1);
-  color: var(--orange-dark);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 20px;
-  letter-spacing: 0.3px;
-}
-.hero h1 {
-  font-size: 52px;
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -1.2px;
-  margin-bottom: 20px;
-}
-.hero h1 .accent {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-sub {
-  font-size: 19px;
-  color: var(--ink-soft);
-  margin-bottom: 32px;
-  line-height: 1.55;
-}
-.hero-actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.hero-trust {
-  margin-top: 32px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--ink-muted);
-  font-size: 14px;
-}
-.check {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.check::before {
-  content: "✓";
-  color: var(--green);
-  font-weight: 800;
-}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{background:var(--surface-white);border:1px solid var(--soft-border);border-radius:18px;padding:32px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px -12px rgba(255,90,0,0.15);border-color:var(--toca-orange-border)}
+.feature-icon{width:52px;height:52px;border-radius:14px;background:var(--toca-orange-soft);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.feature-card h3{font-size:19px;font-weight:700;margin-bottom:10px}
+.feature-card p{color:var(--slate);font-size:15px;line-height:1.6}
+@media (max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}section{padding:70px 0}.section-header h2{font-size:32px}}
+@media (max-width:600px){.features-grid{grid-template-columns:1fr}}
 
-.hero-visual {
-  position: relative;
-  aspect-ratio: 4/5;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-  border-radius: 28px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: 0 24px 60px rgba(255,107,53,0.25);
-}
-.mock-screen {
-  background: white;
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-}
-.mock-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
-}
-.mock-header strong { font-size: 14px; }
-.mock-status {
-  background: var(--green);
-  color: white;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-weight: 600;
-}
-.mock-amount {
-  font-size: 36px;
-  font-weight: 800;
-  margin: 8px 0;
-}
-.mock-label { font-size: 12px; color: var(--ink-muted); }
-.mock-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  font-size: 14px;
-  border-bottom: 1px solid var(--line);
-}
-.mock-row:last-child { border-bottom: none; }
-.mock-btn {
-  background: var(--orange);
-  color: white;
-  text-align: center;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 600;
-  margin-top: 12px;
-  font-size: 14px;
-}
+.dashboard-section{background:linear-gradient(180deg,var(--warm-bg) 0%,var(--cream-bg) 100%);position:relative;overflow:hidden}
+.dashboard-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.dashboard-text .eyebrow{background:var(--surface-white);color:var(--toca-orange)}
+.dashboard-text h2{font-size:44px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:20px}
+.dashboard-text p{font-size:17px;color:var(--slate);margin-bottom:24px;line-height:1.6}
+.dashboard-features{list-style:none;margin-bottom:32px}
+.dashboard-features li{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:15px;color:var(--charcoal)}
+.dashboard-features li svg{flex-shrink:0;margin-top:2px}
+.dashboard-mock-wrap{position:relative}
+.dashboard-mock{background:var(--charcoal);border-radius:18px;padding:12px;box-shadow:0 30px 60px -20px rgba(17,24,39,0.3)}
+.dashboard-screen{background:#fff;border-radius:10px;overflow:hidden;aspect-ratio:16/10}
+.dashboard-badge{position:absolute;top:-12px;right:24px;background:var(--toca-orange);color:#fff;padding:6px 14px;border-radius:14px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 4px 12px rgba(255,90,0,0.3)}
+@media (max-width:900px){.dashboard-grid{grid-template-columns:1fr;gap:40px}.dashboard-text h2{font-size:32px}}
 
-@media (max-width: 920px) {
-  .hero { padding: 56px 0 70px; }
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .hero h1 { font-size: 38px; }
-  .hero-sub { font-size: 17px; }
-  .hero-visual { aspect-ratio: auto; padding: 32px; }
-}
+.pricing-section{background:var(--surface-white)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.price-card{background:var(--surface-warm);border:1.5px solid var(--soft-border);border-radius:20px;padding:36px 28px;position:relative;transition:transform .2s,box-shadow .2s}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -14px rgba(17,24,39,0.1)}
+.price-card.featured{background:linear-gradient(180deg,var(--toca-orange-soft) 0%,var(--surface-warm) 60%);border:2px solid var(--toca-orange);box-shadow:0 20px 40px -16px rgba(255,90,0,0.18)}
+.price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--toca-orange);color:#fff;padding:6px 16px;border-radius:14px;font-size:12px;font-weight:700;letter-spacing:.5px}
+.price-card h3{font-size:20px;font-weight:700;margin-bottom:6px}
+.price-tagline{color:var(--muted);font-size:14px;margin-bottom:24px}
+.price-amount{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
+.price-amount .num{font-size:48px;font-weight:800;letter-spacing:-0.03em;line-height:1}
+.price-amount .currency{font-size:18px;font-weight:600;color:var(--slate)}
+.price-amount .period{font-size:15px;color:var(--muted)}
+.price-meta{color:var(--muted);font-size:13px;margin-bottom:24px}
+.price-card .btn{width:100%;justify-content:center;margin-bottom:24px}
+.price-card .btn-secondary{background:transparent}
+.price-features{list-style:none}
+.price-features li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:var(--charcoal)}
+.price-features li svg{flex-shrink:0;color:var(--success);margin-top:2px}
+@media (max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:420px}}
 
-/* ===== Section base ===== */
-.section {
-  padding: 96px 0;
-}
-.section-cream { background: var(--cream); }
-.section-head {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto 64px;
-}
-.section-eyebrow {
-  display: inline-block;
-  color: var(--orange-dark);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.section-head h2 {
-  font-size: 40px;
-  font-weight: 800;
-  letter-spacing: -0.8px;
-  margin-bottom: 16px;
-  line-height: 1.15;
-}
-.section-head p {
-  font-size: 18px;
-  color: var(--ink-soft);
-}
+.faq-section{background:var(--warm-bg)}
+.faq-grid{max-width:780px;margin:0 auto}
+.faq-item{background:var(--surface-white);border:1px solid var(--soft-border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:border-color .15s}
+.faq-item:hover{border-color:var(--toca-orange-border)}
+.faq-question{width:100%;text-align:left;padding:20px 24px;background:transparent;border:none;cursor:pointer;font-weight:600;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--charcoal);font-family:inherit}
+.faq-question::after{content:"+";font-size:24px;font-weight:300;color:var(--toca-orange);transition:transform .2s}
+.faq-item.open .faq-question::after{transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding:0 24px;color:var(--slate);font-size:15px;line-height:1.6}
+.faq-item.open .faq-answer{max-height:300px;padding:0 24px 20px}
 
-@media (max-width: 720px) {
-  .section { padding: 64px 0; }
-  .section-head h2 { font-size: 30px; }
-  .section-head p { font-size: 16px; }
-}
+.cta-final{background:linear-gradient(135deg,var(--toca-orange) 0%,var(--toca-orange-deep) 100%);border-radius:32px;padding:72px 48px;text-align:center;margin:80px auto;max-width:1100px;color:#fff}
+.cta-final h2{font-size:42px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:16px}
+.cta-final p{font-size:18px;opacity:.92;margin-bottom:32px;max-width:540px;margin-left:auto;margin-right:auto}
+.cta-final .btn{background:#fff;color:var(--toca-orange);font-weight:700}
+.cta-final .btn:hover{background:var(--cream-bg)}
+@media (max-width:768px){.cta-final{padding:56px 24px;border-radius:24px;margin:60px 16px}.cta-final h2{font-size:30px}}
 
-/* ===== Features ===== */
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.feature {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 32px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.feature:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
-.feature-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  margin-bottom: 20px;
-}
-.feature h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.feature p {
-  color: var(--ink-soft);
-  font-size: 15px;
-}
-
-@media (max-width: 920px) {
-  .features { grid-template-columns: 1fr; gap: 16px; }
-}
-
-/* ===== How it works ===== */
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  position: relative;
-}
-.step {
-  text-align: center;
-  padding: 0 16px;
-}
-.step-num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  background: white;
-  border: 2px solid var(--orange);
-  color: var(--orange);
-  border-radius: 50%;
-  font-weight: 800;
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-.step h3 {
-  font-size: 19px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.step p {
-  color: var(--ink-soft);
-  font-size: 15px;
-}
-
-@media (max-width: 920px) {
-  .steps { grid-template-columns: 1fr; gap: 32px; }
-}
-
-/* ===== Pricing teaser ===== */
-.pricing-teaser {
-  background: linear-gradient(135deg, var(--ink) 0%, #2A2A2A 100%);
-  color: white;
-  padding: 72px 48px;
-  border-radius: 24px;
-  text-align: center;
-}
-.pricing-teaser h2 {
-  font-size: 38px;
-  font-weight: 800;
-  letter-spacing: -0.6px;
-  margin-bottom: 16px;
-}
-.pricing-teaser p {
-  font-size: 18px;
-  opacity: 0.85;
-  margin-bottom: 32px;
-}
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 40px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.tier {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 14px;
-  padding: 24px;
-  text-align: left;
-}
-.tier-name {
-  font-weight: 700;
-  font-size: 17px;
-  margin-bottom: 4px;
-}
-.tier-price {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-.tier-price span {
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.7;
-}
-.tier-desc {
-  font-size: 13px;
-  opacity: 0.8;
-}
-.tier-featured {
-  background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
-  border: none;
-  color: white;
-}
-.tier-featured .tier-desc { opacity: 0.95; }
-
-@media (max-width: 720px) {
-  .pricing-teaser { padding: 48px 24px; }
-  .pricing-teaser h2 { font-size: 28px; }
-  .pricing-grid { grid-template-columns: 1fr; }
-}
-
-/* ===== CTA Form ===== */
-.cta-form {
-  background: white;
-  border-radius: var(--radius);
-  padding: 8px;
-  display: flex;
-  gap: 8px;
-  max-width: 480px;
-  margin: 0 auto;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-}
-.cta-form input {
-  flex: 1;
-  border: none;
-  padding: 14px 16px;
-  font-size: 16px;
-  font-family: inherit;
-  background: transparent;
-  outline: none;
-  color: var(--ink);
-}
-.cta-form .btn {
-  flex-shrink: 0;
-}
-.form-msg {
-  margin-top: 16px;
-  font-size: 14px;
-  min-height: 20px;
-}
-.form-msg.success { color: var(--yellow); }
-.form-msg.error { color: #FF8E8E; }
-
-@media (max-width: 540px) {
-  .cta-form { flex-direction: column; }
-}
-
-/* ===== Footer ===== */
-.footer {
-  background: var(--ink);
-  color: white;
-  padding: 56px 0 32px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 40px;
-}
-.footer-brand p {
-  opacity: 0.7;
-  font-size: 14px;
-  max-width: 360px;
-  margin-top: 12px;
-}
-.footer h4 {
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 16px;
-  opacity: 0.6;
-}
-.footer ul { list-style: none; }
-.footer li { margin-bottom: 8px; font-size: 15px; }
-.footer li a { opacity: 0.85; transition: opacity 0.2s; }
-.footer li a:hover { opacity: 1; }
-.footer-bottom {
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  opacity: 0.6;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-@media (max-width: 720px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-
-/* ===== Animations ===== */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.hero h1, .hero-sub, .hero-actions { animation: fadeUp 0.6s ease-out backwards; }
-.hero-sub { animation-delay: 0.1s; }
-.hero-actions { animation-delay: 0.2s; }
+footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand{max-width:300px}
+.footer-brand p{color:var(--slate);font-size:14px;line-height:1.6;margin-top:14px}
+.footer-col h4{font-weight:700;font-size:14px;margin-bottom:16px;color:var(--charcoal);letter-spacing:.3px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:var(--slate);font-size:14px;transition:color .15s}
+.footer-col a:hover{color:var(--toca-orange)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--divider);color:var(--muted);font-size:13px;flex-wrap:wrap;gap:12px}
+@media (max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="container header-inner">
-    <a href="#" class="logo">
-      <span class="logo-mark">TC</span>
-      <span>Toca y Cobra</span>
+<nav>
+  <div class="container nav-wrap">
+    <a href="#" class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 60 60" width="28" height="28">
+          <circle cx="30" cy="20" r="3" fill="#fff"/>
+          <rect x="28.5" y="22" width="3" height="2" fill="#fff"/>
+          <path d="M 14 42 L 14 40 A 16 16 0 0 1 46 40 L 46 42 Z" fill="#fff"/>
+          <rect x="11" y="42" width="38" height="3" rx="1.5" fill="#fff"/>
+        </svg>
+      </div>
+      <span class="brand-name">Toca y Cobra</span>
     </a>
-    <nav class="nav">
-      <a href="#features">Funciones</a>
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#planes">Planes</a>
-      <a href="#lista-espera" class="btn btn-primary">Lista de espera</a>
-    </nav>
+    <div class="nav-links">
+      <a href="#features">Producto</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#pricing">Precios</a>
+      <a href="/soporte.html">Soporte</a>
+    </div>
+    <a href="/iniciar-sesion.html" class="btn btn-primary">Iniciar sesión</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-decor hero-decor-1"></div>
+  <div class="hero-decor hero-decor-2"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Beta abierta — Mayo 2026</div>
+        <h1>Cobra rápido.<br><span class="accent">Vende mejor.</span></h1>
+        <p class="lead">El punto de venta más simple de México para restaurantes y tiendas. Sin curva de aprendizaje. Funciona aunque se caiga el wifi. Reportes claros desde el primer ticket.</p>
+        <div class="hero-ctas">
+          <a href="https://play.google.com/store" class="btn btn-primary btn-large">Descarga la app</a>
+          <a href="#features" class="btn btn-secondary btn-large">Ver características</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" class="hero-trust-check"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Sin tarjeta de crédito</div>
+          <div class="hero-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" class="hero-trust-check"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Plan gratis para siempre</div>
+          <div class="hero-trust-item"><svg width="16" height="16" viewBox="0 0 16 16" class="hero-trust-check"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> En español</div>
+        </div>
+      </div>
+      <div class="tablet-mock">
+        <div class="tablet-screen">
+          <svg viewBox="0 0 600 375" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+            <rect width="600" height="375" fill="#FFF9F4"/>
+            <rect x="0" y="0" width="80" height="375" fill="#fff"/>
+            <line x1="80" y1="0" x2="80" y2="375" stroke="#F3E7DE"/>
+            <rect x="12" y="14" width="56" height="40" rx="10" fill="#FFF0E6"/>
+            <circle cx="24" cy="34" r="6" fill="#FF5A00"/>
+            <text x="40" y="38" font-family="Inter" font-size="9" font-weight="700" fill="#FF5A00">Inicio</text>
+            <g font-family="Inter" font-size="9" fill="#6B7280">
+              <circle cx="24" cy="80" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="83">Venta</text>
+              <circle cx="24" cy="105" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="108">Caja</text>
+              <circle cx="24" cy="130" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="133">Catálogo</text>
+              <circle cx="24" cy="155" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="158">Mesas</text>
+              <circle cx="24" cy="180" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="183">Reportes</text>
+              <circle cx="24" cy="205" r="5" fill="none" stroke="#9CA3AF"/><text x="40" y="208">Equipo</text>
+            </g>
+            <rect x="96" y="14" width="20" height="20" rx="5" fill="#FF5A00"/>
+            <text x="120" y="22" font-family="Inter" font-size="9" font-weight="700" fill="#111827">tacos guero</text>
+            <text x="120" y="32" font-family="Inter" font-size="7" fill="#6B7280">Toca y Cobra · Online</text>
+            <text x="96" y="60" font-family="Inter" font-size="14" font-weight="800" fill="#111827">¡Hola, Adrián!</text>
+            <text x="96" y="74" font-family="Inter" font-size="8" fill="#6B7280">Resumen del día · 18 mayo</text>
+            <rect x="96" y="86" width="110" height="56" rx="8" fill="#fff" stroke="#EFE4DA"/>
+            <text x="106" y="100" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">VENTA</text>
+            <text x="106" y="124" font-family="Inter" font-size="16" font-weight="800" fill="#111827">$17,250</text>
+            <text x="106" y="135" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +12%</text>
+            <rect x="214" y="86" width="110" height="56" rx="8" fill="#fff" stroke="#EFE4DA"/>
+            <text x="224" y="100" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">TICKETS</text>
+            <text x="224" y="124" font-family="Inter" font-size="16" font-weight="800" fill="#111827">87</text>
+            <text x="224" y="135" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +8%</text>
+            <rect x="332" y="86" width="110" height="56" rx="8" fill="#fff" stroke="#EFE4DA"/>
+            <text x="342" y="100" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">PROMEDIO</text>
+            <text x="342" y="124" font-family="Inter" font-size="16" font-weight="800" fill="#111827">$198</text>
+            <text x="342" y="135" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +4%</text>
+            <rect x="450" y="86" width="110" height="56" rx="8" fill="#fff" stroke="#EFE4DA"/>
+            <text x="460" y="100" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">META</text>
+            <text x="460" y="124" font-family="Inter" font-size="16" font-weight="800" fill="#111827">68%</text>
+            <text x="460" y="135" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">+$8,500</text>
+            <rect x="96" y="158" width="346" height="180" rx="8" fill="#fff" stroke="#EFE4DA"/>
+            <text x="108" y="174" font-family="Inter" font-size="10" font-weight="700" fill="#111827">Ventas por hora</text>
+            <path d="M 116 320 Q 150 300 180 290 T 240 260 T 310 220 T 380 230 T 430 290" stroke="#FF5A00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M 116 320 Q 150 300 180 290 T 240 260 T 310 220 T 380 230 T 430 290 L 430 330 L 116 330 Z" fill="#FF5A00" opacity="0.12"/>
+            <rect x="450" y="158" width="110" height="56" rx="8" fill="#EAF7EF"/>
+            <text x="462" y="174" font-family="Inter" font-size="9" font-weight="700" fill="#111827">Cajeros</text>
+            <text x="462" y="200" font-family="Inter" font-size="18" font-weight="800" fill="#16A34A">2</text>
+            <rect x="450" y="220" width="110" height="56" rx="8" fill="#FFF4DE"/>
+            <text x="462" y="236" font-family="Inter" font-size="9" font-weight="700" fill="#111827">Alertas</text>
+            <text x="462" y="262" font-family="Inter" font-size="18" font-weight="800" fill="#F59E0B">1</text>
+            <rect x="450" y="282" width="110" height="56" rx="8" fill="#FDECEC"/>
+            <text x="462" y="298" font-family="Inter" font-size="9" font-weight="700" fill="#111827">Stock bajo</text>
+            <text x="462" y="324" font-family="Inter" font-size="18" font-weight="800" fill="#DC2626">3</text>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <span class="eyebrow">🇲🇽 Hecho en México · Lanzamiento 2026</span>
-      <h1>
-        Cobra rápido.<br>
-        El POS más simple <span class="accent">de México</span>.
-      </h1>
-      <p class="hero-sub">
-        El punto de venta para taquerías, fondas y cafeterías mexicanas.
-        Funciona sin internet. Tu cajero lo entiende en 10 minutos.
-        Multi-dispositivo. Pensado para tu negocio.
-      </p>
-      <div class="hero-actions">
-        <a href="#lista-espera" class="btn btn-primary btn-large">Únete a la lista de espera</a>
-        <a href="#features" class="btn btn-ghost btn-large">Ver cómo funciona</a>
-      </div>
-      <div class="hero-trust">
-        <span class="check">Sin contratos</span>
-        <span class="check">14 días gratis</span>
-        <span class="check">Soporte en español</span>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="mock-screen">
-        <div class="mock-header">
-          <strong>Mesa 5 · Pedro</strong>
-          <span class="mock-status">EN COCINA</span>
-        </div>
-        <div class="mock-label">Total a cobrar</div>
-        <div class="mock-amount">$185.<span style="font-size:24px">00</span></div>
-        <div class="mock-row"><span>3× Tacos al pastor</span><span>$105</span></div>
-        <div class="mock-row"><span>2× Coca cola</span><span>$50</span></div>
-        <div class="mock-row"><span>1× Quesadilla</span><span>$30</span></div>
-        <div class="mock-btn">💵 Pago exacto $185</div>
-      </div>
+<div class="trust">
+  <div class="container">
+    <div class="trust-text">Pensado para restaurantes y tiendas mexicanas</div>
+    <div class="trust-row">
+      <div class="trust-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 5v5c0 4.5 3 7.5 7 8 4-.5 7-3.5 7-8V5l-7-3z" stroke="currentColor" stroke-width="1.5"/></svg> Datos en tu dispositivo</div>
+      <div class="trust-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 7l7-4 7 4-7 4-7-4zM3 13l7 4 7-4M3 10l7 4 7-4" stroke="currentColor" stroke-width="1.5"/></svg> Multi-dispositivo</div>
+      <div class="trust-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Setup en 60 segundos</div>
+      <div class="trust-item"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Sin tarjeta de crédito</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- FEATURES -->
-<section class="section" id="features">
+<section id="features">
   <div class="container">
-    <div class="section-head">
-      <span class="section-eyebrow">Lo que vas a usar todos los días</span>
-      <h2>Lo más simple del mercado.<br>Lo más completo de tu lado.</h2>
-      <p>Todo lo que necesitas para operar tu restaurante. Nada de lo que no.</p>
+    <div class="section-header">
+      <h2>Todo lo que tu negocio necesita.<br>Nada que te estorbe.</h2>
+      <p>Construido con la lógica comercial de los grandes POS, pero sin la complejidad. Cada función está a un toque.</p>
     </div>
-
-    <div class="features">
-      <div class="feature">
-        <div class="feature-icon">📱</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 7h18M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7M3 7l2-4h14l2 4M8 11h8" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Cobra en 3 toques</h3>
+        <p>Sin curva de aprendizaje. Tu cajero entiende el flujo desde la primera venta.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="#FF5A00" stroke-width="1.8"/><circle cx="8" cy="14" r="1.5" fill="#FF5A00"/><circle cx="12" cy="14" r="1.5" fill="#FF5A00"/><circle cx="16" cy="14" r="1.5" fill="#FF5A00"/><path d="M7 6V4M17 6V4" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Mesas que se gestionan solas</h3>
+        <p>Abrir, cobrar, dividir cuenta, imprimir pre-cuenta. Todo desde el plano del restaurante.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#FF5A00" stroke-width="1.8"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" stroke="#FF5A00" stroke-width="1.5"/></svg></div>
         <h3>Funciona sin internet</h3>
-        <p>
-          Tu sistema opera 100% en tu WiFi local. Aunque se caiga el internet,
-          sigues vendiendo, cobrando, imprimiendo. Sincroniza solito cuando regresa.
-        </p>
+        <p>Cobra aunque se caiga el wifi. Tus ventas se guardan localmente y sincronizan al volver.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon">📊</div>
-        <h3>Reportes en vivo</h3>
-        <p>
-          Mira ventas del día, productos más vendidos, comparativos y
-          tendencias en tiempo real. Toda la información de tu negocio
-          en una sola pantalla, sin reportes complicados.
-        </p>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 19h18M5 19V11M9 19V7M13 19V13M17 19V9M21 19V5" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Reportes que sí entiendes</h3>
+        <p>Ventas por día, mes, comparativas. Sin Excel, sin curvas. Decisiones rápidas.</p>
       </div>
-      <div class="feature">
-        <div class="feature-icon">🪑</div>
-        <h3>Equipo coordinado en tu LAN</h3>
-        <p>
-          Caja, mesero y cocina trabajan en tablets distintas con un solo plan.
-          El mesero pide, cocina ve el ticket en pantalla, caja cobra. Sin
-          tickets perdidos, sin gritos.
-        </p>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#FF5A00" stroke-width="1.8"/><circle cx="17" cy="9" r="2.5" stroke="#FF5A00" stroke-width="1.8"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M14 20c0-2.5 1.5-4.5 4-4.5" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Cada cajero, su sesión</h3>
+        <p>PIN propio, métricas individuales. Mide productividad por persona sin enredos.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M5.5 18.5l4-4M14.5 9.5l4-4" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Crece sin migrar</h3>
+        <p>De 1 caja a 10. De 1 sucursal a varias. El sistema crece contigo, no contra ti.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CÓMO FUNCIONA -->
-<section class="section section-cream" id="como-funciona">
+<section id="dashboard" class="dashboard-section">
   <div class="container">
-    <div class="section-head">
-      <span class="section-eyebrow">3 pasos para arrancar</span>
-      <h2>Tu primera venta en 60 segundos</h2>
-      <p>Sin instalación complicada, sin capacitación, sin manual.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Descarga la app</h3>
-        <p>Instala Toca y Cobra en tu tablet desde Google Play. Configura tu
-        negocio en 60 segundos.</p>
+    <div class="dashboard-grid">
+      <div class="dashboard-text">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Tus ventas en vivo</div>
+        <h2>Consulta tu negocio<br>desde cualquier lugar.</h2>
+        <p>Conéctate a tu Dashboard Web desde tu computadora o celular y revisa lo que pasa en tu local en tiempo real — aunque no estés ahí.</p>
+        <ul class="dashboard-features">
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ventas del día, semana y mes en vivo</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productos más vendidos y stock bajo</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productividad por cajero y por mesero</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Alertas cuando algo merezca tu atención</li>
+        </ul>
+        <a href="/iniciar-sesion.html" class="btn btn-primary btn-large">Iniciar sesión</a>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Crea tu primer producto</h3>
-        <p>Nombre, precio, categoría. Listo. Si quieres receta, costos, variantes,
-        las activas cuando las necesites.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Empieza a cobrar</h3>
-        <p>Toca el producto, toca cobrar, imprime ticket. Si hay tabletas extra
-        para mesero o cocina, las pareas con un QR.</p>
+      <div class="dashboard-mock-wrap">
+        <div class="dashboard-badge">Próximamente</div>
+        <div class="dashboard-mock">
+          <div class="dashboard-screen">
+            <svg viewBox="0 0 600 375" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+              <rect width="600" height="375" fill="#FFF9F4"/>
+              <rect x="0" y="0" width="600" height="40" fill="#fff"/>
+              <rect x="16" y="10" width="20" height="20" rx="5" fill="#FF5A00"/>
+              <text x="44" y="24" font-family="Inter" font-size="11" font-weight="700" fill="#111827">Toca y Cobra · Dashboard</text>
+              <text x="500" y="24" font-family="Inter" font-size="9" fill="#6B7280">Adrián M.</text>
+              <line x1="0" y1="40" x2="600" y2="40" stroke="#F3E7DE"/>
+              <text x="16" y="60" font-family="Inter" font-size="14" font-weight="800" fill="#111827">Resumen del mes</text>
+              <text x="16" y="74" font-family="Inter" font-size="8" fill="#6B7280">Mayo 2026</text>
+              <rect x="16" y="86" width="138" height="68" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="28" y="102" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">VENTA TOTAL</text>
+              <text x="28" y="128" font-family="Inter" font-size="18" font-weight="800" fill="#111827">$284,520</text>
+              <text x="28" y="142" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +18% vs abril</text>
+              <rect x="162" y="86" width="138" height="68" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="174" y="102" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">TICKETS</text>
+              <text x="174" y="128" font-family="Inter" font-size="18" font-weight="800" fill="#111827">1,432</text>
+              <text x="174" y="142" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +12% vs abril</text>
+              <rect x="308" y="86" width="138" height="68" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="320" y="102" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">PROMEDIO</text>
+              <text x="320" y="128" font-family="Inter" font-size="18" font-weight="800" fill="#111827">$198.70</text>
+              <text x="320" y="142" font-family="Inter" font-size="7" font-weight="600" fill="#16A34A">▲ +6% vs abril</text>
+              <rect x="454" y="86" width="130" height="68" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="466" y="102" font-family="Inter" font-size="7" font-weight="700" fill="#6B7280">META MES</text>
+              <text x="466" y="128" font-family="Inter" font-size="18" font-weight="800" fill="#FF5A00">94.8%</text>
+              <text x="466" y="142" font-family="Inter" font-size="7" fill="#6B7280">5 días al cierre</text>
+              <rect x="16" y="166" width="430" height="194" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="28" y="184" font-family="Inter" font-size="10" font-weight="700" fill="#111827">Ventas por día</text>
+              <g fill="#FF5A00">
+                <rect x="40" y="290" width="14" height="55" rx="2"/><rect x="58" y="260" width="14" height="85" rx="2"/><rect x="76" y="240" width="14" height="105" rx="2"/><rect x="94" y="270" width="14" height="75" rx="2"/><rect x="112" y="260" width="14" height="85" rx="2"/><rect x="130" y="220" width="14" height="125" rx="2"/><rect x="148" y="200" width="14" height="145" rx="2"/><rect x="166" y="240" width="14" height="105" rx="2"/><rect x="184" y="225" width="14" height="120" rx="2"/><rect x="202" y="250" width="14" height="95" rx="2"/><rect x="220" y="270" width="14" height="75" rx="2"/><rect x="238" y="230" width="14" height="115" rx="2"/><rect x="256" y="210" width="14" height="135" rx="2"/><rect x="274" y="200" width="14" height="145" rx="2"/><rect x="292" y="220" width="14" height="125" rx="2"/><rect x="310" y="195" width="14" height="150" rx="2"/><rect x="328" y="215" width="14" height="130" rx="2"/><rect x="346" y="230" width="14" height="115" rx="2"/><rect x="364" y="245" width="14" height="100" rx="2"/><rect x="382" y="220" width="14" height="125" rx="2"/><rect x="400" y="205" width="14" height="140" rx="2"/>
+              </g>
+              <rect x="454" y="166" width="130" height="194" rx="8" fill="#fff" stroke="#EFE4DA"/>
+              <text x="466" y="184" font-family="Inter" font-size="10" font-weight="700" fill="#111827">Top productos</text>
+              <g font-family="Inter">
+                <circle cx="476" cy="206" r="8" fill="#FF5A00"/><text x="476" y="210" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">1</text>
+                <text x="490" y="204" font-size="8" font-weight="600" fill="#111827">Taco al pastor</text><text x="490" y="214" font-size="6" fill="#6B7280">486 vendidos</text>
+                <circle cx="476" cy="232" r="8" fill="#FF5A00" opacity="0.8"/><text x="476" y="236" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">2</text>
+                <text x="490" y="230" font-size="8" font-weight="600" fill="#111827">Taco suadero</text><text x="490" y="240" font-size="6" fill="#6B7280">342 vendidos</text>
+                <circle cx="476" cy="258" r="8" fill="#FF5A00" opacity="0.65"/><text x="476" y="262" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">3</text>
+                <text x="490" y="256" font-size="8" font-weight="600" fill="#111827">Quesadilla</text><text x="490" y="266" font-size="6" fill="#6B7280">198 vendidos</text>
+                <circle cx="476" cy="284" r="8" fill="#FF5A00" opacity="0.5"/><text x="476" y="288" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">4</text>
+                <text x="490" y="282" font-size="8" font-weight="600" fill="#111827">Coca-Cola</text><text x="490" y="292" font-size="6" fill="#6B7280">258 vendidas</text>
+                <circle cx="476" cy="310" r="8" fill="#FF5A00" opacity="0.35"/><text x="476" y="314" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">5</text>
+                <text x="490" y="308" font-size="8" font-weight="600" fill="#111827">Horchata</text><text x="490" y="318" font-size="6" fill="#6B7280">156 vendidas</text>
+              </g>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="section" id="planes">
+<section id="pricing" class="pricing-section">
   <div class="container">
-    <div class="pricing-teaser">
-      <h2>Planes pensados para negocios mexicanos</h2>
-      <p>Empieza gratis. Cuando crezcas, escala con nosotros.</p>
-
-      <div class="pricing-grid">
-        <div class="tier">
-          <div class="tier-name">Solo</div>
-          <div class="tier-price">$0 <span>/ mes</span></div>
-          <div class="tier-desc">Para arrancar. 1 dispositivo, productos
-          ilimitados, ticket impreso.</div>
-        </div>
-        <div class="tier tier-featured">
-          <div class="tier-name">Equipo</div>
-          <div class="tier-price">$99 <span>MXN / mes</span></div>
-          <div class="tier-desc">Multi-dispositivo, KDS de cocina, reportes
-          avanzados, alertas y métricas del día.</div>
-        </div>
-        <div class="tier">
-          <div class="tier-name">Cadena</div>
-          <div class="tier-price">$199 <span>MXN / mes</span></div>
-          <div class="tier-desc">Multi-sucursal, facturación CFDI,
-          predicción de demanda, soporte prioritario.</div>
-        </div>
+    <div class="section-header">
+      <h2>Precios honestos.<br>Sin sorpresas.</h2>
+      <p>Empieza gratis. Cuando crezcas, paga solo por lo que usas. Sin contratos, sin comisiones por venta.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Semilla</h3>
+        <div class="price-tagline">Para empezar</div>
+        <div class="price-amount"><span class="num">$0</span><span class="period">/ mes</span></div>
+        <div class="price-meta">Para siempre. Sin tarjeta.</div>
+        <a href="https://play.google.com/store" class="btn btn-secondary">Empezar gratis</a>
+        <ul class="price-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> 1 caja / 1 dispositivo</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Productos ilimitados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Reportes básicos</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Modo offline</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte por email</li>
+        </ul>
       </div>
-
-      <a href="#lista-espera" class="btn btn-primary btn-large">Reserva tu acceso temprano</a>
+      <div class="price-card featured">
+        <div class="price-badge">Más popular</div>
+        <h3>Crece</h3>
+        <div class="price-tagline">Para negocios establecidos</div>
+        <div class="price-amount"><span class="currency">$</span><span class="num">299</span><span class="period">/ mes</span></div>
+        <div class="price-meta">Por sucursal · Cancela cuando quieras</div>
+        <a href="https://play.google.com/store" class="btn btn-primary">Probar 14 días gratis</a>
+        <ul class="price-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Hasta 5 cajas + meseros</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mesas + KDS cocina</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Dashboard Web</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Reportes avanzados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Inventario con food cost</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte prioritario</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>Escala</h3>
+        <div class="price-tagline">Multi-sucursal</div>
+        <div class="price-amount"><span class="currency">$</span><span class="num">599</span><span class="period">/ mes</span></div>
+        <div class="price-meta">Por sucursal · Volumen disponible</div>
+        <a href="mailto:ventas@tocaycobra.com.mx" class="btn btn-secondary">Habla con ventas</a>
+        <ul class="price-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Sucursales ilimitadas</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Comparativas entre sucursales</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Facturación CFDI 4.0</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Roles avanzados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte dedicado</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- LISTA DE ESPERA -->
-<section class="section section-cream" id="lista-espera">
+<section id="faq" class="faq-section">
   <div class="container">
-    <div class="section-head">
-      <span class="section-eyebrow">Lanzamiento 2026</span>
-      <h2>Sé de los primeros en usarlo</h2>
-      <p>Únete a la lista de espera y obtén <strong>3 meses gratis</strong> del plan
-      Equipo cuando lancemos.</p>
+    <div class="section-header">
+      <h2>Preguntas frecuentes</h2>
+      <p>Lo que siempre nos preguntan. Si lo tuyo no está, escríbenos.</p>
     </div>
-
-    <form class="cta-form" id="waitlist-form">
-      <input
-        type="email"
-        name="email"
-        placeholder="tu@correo.com"
-        required
-        autocomplete="email"
-      >
-      <button type="submit" class="btn btn-primary">Apartar mi lugar</button>
-    </form>
-    <div class="form-msg" id="form-msg" style="text-align:center"></div>
+    <div class="faq-grid">
+      <div class="faq-item"><button class="faq-question">¿Funciona sin internet?</button><div class="faq-answer"><p>Sí. La app está pensada para que cobres aunque se caiga el wifi. Tus ventas se guardan localmente y se sincronizan automáticamente cuando vuelve la conexión.</p></div></div>
+      <div class="faq-item"><button class="faq-question">¿En qué dispositivos funciona?</button><div class="faq-answer"><p>En cualquier tablet o celular Android (versión 8+). Puedes empezar con un solo dispositivo y sumar más cajas y meseros cuando crezcas.</p></div></div>
+      <div class="faq-item"><button class="faq-question">¿Puedo facturar (CFDI 4.0)?</button><div class="faq-answer"><p>El módulo de facturación CFDI 4.0 está incluido en el plan Escala. Funciona con tu RFC, CSD y PAC (Facturama).</p></div></div>
+      <div class="faq-item"><button class="faq-question">¿Cuándo veo mis ventas en el Dashboard Web?</button><div class="faq-answer"><p>El Dashboard Web está en desarrollo y estará disponible próximamente. Si quieres ser de los primeros en probarlo, escríbenos a soporte@tocaycobra.club.</p></div></div>
+      <div class="faq-item"><button class="faq-question">¿Necesito hardware especial?</button><div class="faq-answer"><p>No. Funciona con tu tablet/celular existente. Si quieres impresora térmica de tickets o cajón de dinero, los soportamos por Bluetooth — pero son opcionales.</p></div></div>
+      <div class="faq-item"><button class="faq-question">¿Cómo paso de plan?</button><div class="faq-answer"><p>Desde la app, en Ajustes → Plan. Puedes subir o bajar cuando quieras, sin contratos. Solo pagas la diferencia del mes en curso.</p></div></div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
+<section style="padding:0">
+  <div class="container">
+    <div class="cta-final">
+      <h2>Empieza gratis. Hoy.</h2>
+      <p>Sin tarjeta de crédito, sin contratos. Configura tu primer producto en menos de 60 segundos.</p>
+      <a href="https://play.google.com/store" class="btn btn-large">Descarga la app</a>
+    </div>
+  </div>
+</section>
+
+<footer>
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo" style="color:white">
-          <span class="logo-mark">TC</span>
-          <span>Toca y Cobra</span>
+        <div class="brand">
+          <div class="brand-icon"><svg viewBox="0 0 60 60" width="28" height="28"><circle cx="30" cy="20" r="3" fill="#fff"/><rect x="28.5" y="22" width="3" height="2" fill="#fff"/><path d="M 14 42 L 14 40 A 16 16 0 0 1 46 40 L 46 42 Z" fill="#fff"/><rect x="11" y="42" width="38" height="3" rx="1.5" fill="#fff"/></svg></div>
+          <span class="brand-name">Toca y Cobra</span>
         </div>
-        <p>El POS más simple para tu restaurante mexicano. Hecho con cariño en México.</p>
+        <p>El punto de venta más simple de México. Hecho para que vendas mejor, no para que pierdas tiempo configurando.</p>
       </div>
-      <div>
+      <div class="footer-col">
         <h4>Producto</h4>
         <ul>
-          <li><a href="#features">Funciones</a></li>
-          <li><a href="#como-funciona">Cómo funciona</a></li>
-          <li><a href="#planes">Planes</a></li>
+          <li><a href="#features">Características</a></li>
+          <li><a href="#dashboard">Dashboard Web</a></li>
+          <li><a href="#pricing">Precios</a></li>
+          <li><a href="https://play.google.com/store">Descarga la app</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Contacto</h4>
+      <div class="footer-col">
+        <h4>Soporte</h4>
         <ul>
+          <li><a href="/soporte.html">Centro de ayuda</a></li>
           <li><a href="mailto:soporte@tocaycobra.club">soporte@tocaycobra.club</a></li>
-          <li>Lanzamiento previsto 2026</li>
+          <li><a href="/iniciar-sesion.html">Iniciar sesión</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/privacidad.html">Privacidad</a></li>
+          <li><a href="/terminos.html">Términos</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Toca y Cobra · Todos los derechos reservados</span>
-      <span>v1.0 · Hecho en México 🇲🇽</span>
+      <div>© 2026 Toca y Cobra · Hecho en México</div>
+      <div>tocaycobra.com.mx</div>
     </div>
   </div>
 </footer>
 
 <script>
-const form = document.getElementById('waitlist-form');
-const msg = document.getElementById('form-msg');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const email = form.email.value.trim();
-  if (!email) return;
-
-  const button = form.querySelector('button');
-  button.disabled = true;
-  button.textContent = 'Enviando…';
-
-  // Por ahora guardamos en localStorage; cuando tengamos backend Cloudflare,
-  // esto se reemplaza por fetch a /api/waitlist.
-  try {
-    const list = JSON.parse(localStorage.getItem('waitlist') || '[]');
-    if (list.includes(email)) {
-      msg.textContent = '¡Ya estás en la lista! Te avisaremos pronto.';
-      msg.className = 'form-msg success';
-    } else {
-      list.push(email);
-      localStorage.setItem('waitlist', JSON.stringify(list));
-      msg.textContent = '✓ Listo. Te avisamos cuando lancemos.';
-      msg.className = 'form-msg success';
-      form.email.value = '';
-    }
-  } catch (err) {
-    msg.textContent = 'Algo falló. Escríbenos a soporte@tocaycobra.club.';
-    msg.className = 'form-msg error';
-  }
-
-  button.disabled = false;
-  button.textContent = 'Apartar mi lugar';
-
-  setTimeout(() => { msg.textContent = ''; msg.className = 'form-msg'; }, 6000);
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-question').addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>o.classList.remove('open'));
+    if(!open) item.classList.add('open');
+  });
 });
 </script>
-
 </body>
 </html>
