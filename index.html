@@ -115,6 +115,12 @@ section{padding:100px 0}
 @media (max-width:900px){.dashboard-grid{grid-template-columns:1fr;gap:40px}.dashboard-text h2{font-size:32px}}
 
 .pricing-section{background:var(--surface-white)}
+.pricing-toggle{display:flex;justify-content:center;gap:0;margin:0 auto 36px;background:var(--cream-bg);border:1px solid var(--soft-border);border-radius:999px;padding:4px;width:max-content;max-width:90vw}
+.toggle-btn{padding:10px 22px;border-radius:999px;border:none;background:transparent;color:var(--slate);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s,box-shadow .2s}
+.toggle-btn.active{background:var(--toca-orange);color:#fff;box-shadow:0 4px 12px rgba(255,90,0,0.25)}
+.off-badge{background:rgba(22,163,74,0.15);color:#16A34A;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.toggle-btn.active .off-badge{background:rgba(255,255,255,0.22);color:#fff}
+.meta-yearly{display:none}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
 .price-card{background:var(--surface-warm);border:1.5px solid var(--soft-border);border-radius:20px;padding:36px 28px;position:relative;transition:transform .2s,box-shadow .2s}
 .price-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -14px rgba(17,24,39,0.1)}
@@ -132,6 +138,9 @@ section{padding:100px 0}
 .price-features{list-style:none}
 .price-features li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:var(--charcoal)}
 .price-features li svg{flex-shrink:0;color:var(--success);margin-top:2px}
+.price-features .soon{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:8px;background:#F3E7DE;color:#A15600;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;vertical-align:middle;flex-shrink:0}
+.price-features li.upcoming svg{color:#C9AE94}
+.price-features li.upcoming{color:var(--muted)}
 @media (max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:420px}}
 
 .faq-section{background:var(--warm-bg)}
@@ -313,7 +322,7 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <div class="feature-card">
         <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M5.5 18.5l4-4M14.5 9.5l4-4" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/></svg></div>
         <h3>Crece sin migrar</h3>
-        <p>De 1 caja a 10. De 1 sucursal a varias. El sistema crece contigo, no contra ti.</p>
+        <p>De 1 caja a varias. Suma meseros y dispositivos cuando quieras. El sistema crece contigo, no contra ti.</p>
       </div>
     </div>
   </div>
@@ -323,16 +332,16 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
   <div class="container">
     <div class="dashboard-grid">
       <div class="dashboard-text">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> Tus ventas en vivo</div>
-        <h2>Consulta tu negocio<br>desde cualquier lugar.</h2>
-        <p>Conéctate a tu Dashboard Web desde tu computadora o celular y revisa lo que pasa en tu local en tiempo real — aunque no estés ahí.</p>
+        <div class="eyebrow"><span class="eyebrow-dot"></span> Dashboard Web · Próximamente</div>
+        <h2>Pronto podrás consultar tu negocio<br>desde cualquier lugar.</h2>
+        <p>Estamos construyendo el Dashboard Web para que te conectes desde tu computadora o celular y revises lo que pasa en tu local en tiempo real — aunque no estés ahí. Sé de los primeros en probarlo cuando lance.</p>
         <ul class="dashboard-features">
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Ventas del día, semana y mes en vivo</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productos más vendidos y stock bajo</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Productividad por cajero y por mesero</li>
           <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#16A34A" stroke-width="1.5"/><path d="M6 10l3 3 5-6" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Alertas cuando algo merezca tu atención</li>
         </ul>
-        <a href="/iniciar-sesion.html" class="btn btn-primary btn-large">Iniciar sesión</a>
+        <a href="/iniciar-sesion.html" class="btn btn-primary btn-large">Anótate al beta</a>
       </div>
       <div class="dashboard-mock-wrap">
         <div class="dashboard-badge">Próximamente</div>
@@ -396,12 +405,19 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <h2>Precios honestos.<br>Sin sorpresas.</h2>
       <p>Empieza gratis. Cuando crezcas, paga solo por lo que usas. Sin contratos, sin comisiones por venta.</p>
     </div>
+    <div class="pricing-toggle">
+      <button class="toggle-btn active" data-billing="monthly">Mensual</button>
+      <button class="toggle-btn" data-billing="yearly">Anual <span class="off-badge">2 meses gratis</span></button>
+    </div>
     <div class="pricing-grid">
       <div class="price-card">
         <h3>Inicia</h3>
         <div class="price-tagline">Para empezar</div>
-        <div class="price-amount"><span class="num">$0</span><span class="period">/ mes</span></div>
-        <div class="price-meta">Para siempre. Sin tarjeta.</div>
+        <div class="price-amount"><span class="num" data-monthly="$0" data-yearly="$0">$0</span><span class="period">/ mes</span></div>
+        <div class="price-meta">
+          <span class="meta-monthly">Para siempre. Sin tarjeta.</span>
+          <span class="meta-yearly">Gratis para siempre.</span>
+        </div>
         <a href="https://play.google.com/store" class="btn btn-secondary">Empezar gratis</a>
         <ul class="price-features">
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> 1 caja / 1 dispositivo</li>
@@ -415,13 +431,16 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
         <div class="price-badge">Más popular</div>
         <h3>Profesional</h3>
         <div class="price-tagline">Para negocios establecidos</div>
-        <div class="price-amount"><span class="currency">$</span><span class="num">299</span><span class="period">/ mes</span></div>
-        <div class="price-meta">Por sucursal · Cancela cuando quieras</div>
+        <div class="price-amount"><span class="currency">$</span><span class="num" data-monthly="249" data-yearly="208">249</span><span class="period">/ mes</span></div>
+        <div class="price-meta">
+          <span class="meta-monthly">Por sucursal · Cancela cuando quieras</span>
+          <span class="meta-yearly">$2,490 al año · Por sucursal</span>
+        </div>
         <a href="https://play.google.com/store" class="btn btn-primary">Probar 14 días gratis</a>
         <ul class="price-features">
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Hasta 5 cajas + meseros</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mesas + KDS cocina</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Dashboard Web</li>
+          <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Dashboard Web <span class="soon">Próximamente</span></li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Reportes avanzados</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Inventario con food cost</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte prioritario</li>
@@ -430,13 +449,17 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <div class="price-card">
         <h3>Multinegocio</h3>
         <div class="price-tagline">Multi-sucursal</div>
-        <div class="price-amount"><span class="currency">$</span><span class="num">599</span><span class="period">/ mes</span></div>
-        <div class="price-meta">Por sucursal · Volumen disponible</div>
+        <div class="price-amount"><span class="currency">$</span><span class="num" data-monthly="499" data-yearly="416">499</span><span class="period">/ mes</span></div>
+        <div class="price-meta">
+          <span class="meta-monthly">Por sucursal · Volumen disponible</span>
+          <span class="meta-yearly">$4,990 al año · Por sucursal</span>
+        </div>
         <a href="mailto:ventas@tocaycobra.com.mx" class="btn btn-secondary">Habla con ventas</a>
         <ul class="price-features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Sucursales ilimitadas</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Comparativas entre sucursales</li>
+          <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Sucursales ilimitadas <span class="soon">Próximamente</span></li>
+          <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Comparativas entre sucursales <span class="soon">Próximamente</span></li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Facturación CFDI 4.0</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mirador — dashboard ejecutivo</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Roles avanzados</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte dedicado</li>
         </ul>
@@ -520,6 +543,20 @@ document.querySelectorAll('.faq-item').forEach(item=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(o=>o.classList.remove('open'));
     if(!open) item.classList.add('open');
+  });
+});
+
+// Pricing toggle Mensual / Anual
+document.querySelectorAll('.toggle-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const billing=btn.dataset.billing;
+    document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.toggle('active',b===btn));
+    document.querySelectorAll('.price-amount .num').forEach(n=>{
+      const val=billing==='monthly'?n.dataset.monthly:n.dataset.yearly;
+      if(val!==undefined) n.textContent=val;
+    });
+    document.querySelectorAll('.meta-monthly').forEach(m=>{m.style.display=billing==='monthly'?'inline':'none';});
+    document.querySelectorAll('.meta-yearly').forEach(m=>{m.style.display=billing==='yearly'?'inline':'none';});
   });
 });
 </script>
