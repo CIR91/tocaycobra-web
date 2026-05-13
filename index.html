@@ -43,7 +43,14 @@
   --shadow-sm:0 1px 2px rgba(17,24,39,.04),0 1px 1px rgba(17,24,39,.03);
   --shadow-md:0 4px 12px rgba(17,24,39,.06),0 2px 4px rgba(17,24,39,.04);
   --shadow-lg:0 24px 48px -12px rgba(233,79,0,.18),0 8px 16px rgba(17,24,39,.06);
+  --ease-out-soft:cubic-bezier(0.22,0.61,0.36,1);
+  --ease-emphasized:cubic-bezier(0.2,0,0,1);
+  --ease-standard:cubic-bezier(0.4,0,0.2,1);
+  --duration-quick:200ms;
+  --duration-base:320ms;
+  --duration-slow:600ms;
 }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--font-sans);color:var(--charcoal);background:var(--warm-bg);line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -93,6 +100,33 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,249,244,0.85);backdrop-
 .phone-kds-mock{position:absolute;right:-32px;bottom:-24px;width:130px;height:230px;background:var(--charcoal);border-radius:14px;padding:6px;box-shadow:var(--shadow-md);transform:rotate(8deg);z-index:1;display:none}
 @media (min-width:900px){.phone-kds-mock{display:block}}
 .phone-kds-screen{background:#111827;border-radius:9px;overflow:hidden;height:100%}
+
+/* ─── IMPRESORA TÉRMICA CON TICKET ANIMADO ─── */
+.printer-mock{position:absolute;right:-20px;bottom:-30px;width:180px;z-index:1;display:none}
+@media (min-width:900px){.printer-mock{display:block}}
+@keyframes ticket-print{
+  0%,8%{transform:translateY(-160px);opacity:0}
+  12%{opacity:1}
+  20%{transform:translateY(-130px)}
+  35%{transform:translateY(-90px)}
+  50%{transform:translateY(-50px)}
+  65%{transform:translateY(-15px)}
+  80%,92%{transform:translateY(8px);opacity:1}
+  96%,100%{transform:translateY(8px);opacity:0}
+}
+@keyframes printer-shake{
+  0%,8%,80%,100%{transform:translateX(0)}
+  10%,12%,14%,16%,18%,20%,22%,24%,26%,28%,30%,32%,34%,36%,38%,40%,42%,44%,46%,48%,50%,52%,54%,56%,58%,60%,62%,64%,66%{transform:translateX(0.5px)}
+  11%,13%,15%,17%,19%,21%,23%,25%,27%,29%,31%,33%,35%,37%,39%,41%,43%,45%,47%,49%,51%,53%,55%,57%,59%,61%,63%,65%,67%{transform:translateX(-0.5px)}
+}
+@keyframes led-blink{
+  0%,8%,80%,100%{opacity:0.3}
+  10%,67%{opacity:1}
+}
+.printer-body{animation:printer-shake 6s ease-in-out infinite;transform-origin:center}
+.printer-led{animation:led-blink 6s ease-in-out infinite}
+.printer-ticket-anim{animation:ticket-print 6s cubic-bezier(0.45,0.05,0.55,0.95) infinite}
+@media (prefers-reduced-motion:reduce){.printer-body,.printer-led,.printer-ticket-anim{animation:none}.printer-ticket-anim{transform:translateY(8px);opacity:1}}
 @media (max-width:900px){.hero{padding:60px 0 80px}.hero-grid{grid-template-columns:1fr;gap:40px}.hero h1{font-size:44px}.hero p.lead{font-size:17px}}
 
 .trust{padding:32px 0;background:var(--cream-bg);border-top:1px solid var(--divider);border-bottom:1px solid var(--divider)}
@@ -144,34 +178,109 @@ section{padding:100px 0}
 .dashboard-badge{position:absolute;top:-12px;right:24px;background:var(--toca-orange);color:#fff;padding:6px 14px;border-radius:14px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 4px 12px rgba(255,90,0,0.3)}
 @media (max-width:900px){.dashboard-grid{grid-template-columns:1fr;gap:40px}.dashboard-text h2{font-size:32px}}
 
-.pricing-section{background:var(--surface-white)}
-.pricing-toggle{display:flex;justify-content:center;gap:0;margin:0 auto 36px;background:var(--cream-bg);border:1px solid var(--soft-border);border-radius:999px;padding:4px;width:max-content;max-width:90vw}
-.toggle-btn{padding:10px 22px;border-radius:999px;border:none;background:transparent;color:var(--slate);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s,box-shadow .2s}
-.toggle-btn.active{background:var(--toca-orange);color:#fff;box-shadow:0 4px 12px rgba(255,90,0,0.25)}
-.off-badge{background:rgba(22,163,74,0.15);color:#16A34A;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.pricing-section{background:#0F1419;color:#fff;position:relative;overflow:hidden}
+.pricing-section .section-header h2{color:#fff}
+.pricing-section .section-header p{color:rgba(255,255,255,0.55)}
+.pricing-section::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(255,90,0,0.10) 0%,transparent 60%);filter:blur(60px);pointer-events:none}
+.pricing-toggle{display:flex;justify-content:center;gap:0;margin:0 auto 36px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.1);border-radius:999px;padding:4px;width:max-content;max-width:90vw;position:relative}
+.toggle-btn{padding:10px 22px;border-radius:999px;border:none;background:transparent;color:rgba(255,255,255,0.6);font-weight:500;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s,box-shadow .2s;font-variant-numeric:tabular-nums}
+.toggle-btn:hover{color:#fff}
+.toggle-btn.active{background:var(--toca-orange);color:#fff;box-shadow:0 4px 12px rgba(255,90,0,0.35)}
+.off-badge{background:rgba(22,163,74,0.2);color:#7FE2A4;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.3px}
 .toggle-btn.active .off-badge{background:rgba(255,255,255,0.22);color:#fff}
 .meta-yearly{display:none}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
-.price-card{background:var(--surface-warm);border:1.5px solid var(--soft-border);border-radius:20px;padding:36px 28px;position:relative;transition:transform .2s,box-shadow .2s}
-.price-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -14px rgba(17,24,39,0.1)}
-.price-card.featured{background:linear-gradient(180deg,var(--toca-orange-soft) 0%,var(--surface-warm) 60%);border:2px solid var(--toca-orange);box-shadow:0 20px 40px -16px rgba(255,90,0,0.18)}
-.price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--toca-orange);color:#fff;padding:6px 16px;border-radius:14px;font-size:12px;font-weight:700;letter-spacing:.5px}
-.price-card h3{font-size:20px;font-weight:700;margin-bottom:6px}
-.price-tagline{color:var(--muted);font-size:14px;margin-bottom:24px}
-.price-amount{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
-.price-amount .num{font-size:48px;font-weight:800;letter-spacing:-0.03em;line-height:1}
-.price-amount .currency{font-size:18px;font-weight:600;color:var(--slate)}
-.price-amount .period{font-size:15px;color:var(--muted)}
-.price-meta{color:var(--muted);font-size:13px;margin-bottom:24px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto;position:relative}
+.price-card{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:20px;padding:36px 28px;position:relative;transition:transform .25s var(--ease-out-soft,cubic-bezier(0.22,0.61,0.36,1)),box-shadow .25s,border-color .25s;backdrop-filter:blur(10px)}
+.price-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.18);box-shadow:0 20px 40px -16px rgba(0,0,0,0.4)}
+.price-card.featured{background:rgba(255,90,0,0.08);border:1.5px solid var(--toca-orange);box-shadow:0 0 0 1px rgba(255,90,0,0.4),0 24px 60px -20px rgba(255,90,0,0.45)}
+.price-card.featured:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(255,90,0,0.6),0 32px 70px -20px rgba(255,90,0,0.55)}
+.price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--toca-orange);color:#fff;padding:6px 16px;border-radius:14px;font-size:11px;font-weight:700;letter-spacing:.6px;box-shadow:0 6px 14px rgba(255,90,0,0.4)}
+.price-card h3{font-family:var(--font-display);font-size:22px;font-weight:500;margin-bottom:4px;color:#fff;letter-spacing:-0.01em}
+.price-tagline{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:24px}
+.price-amount{display:flex;align-items:baseline;gap:6px;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.price-amount .num{font-family:var(--font-display);font-size:54px;font-weight:500;letter-spacing:-0.03em;line-height:1;color:#fff}
+.price-card.featured .price-amount .num{color:#FFB380}
+.price-amount .currency{font-size:18px;font-weight:600;color:rgba(255,255,255,0.6)}
+.price-amount .period{font-size:14px;color:rgba(255,255,255,0.5)}
+.price-meta{color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:24px}
 .price-card .btn{width:100%;justify-content:center;margin-bottom:24px}
-.price-card .btn-secondary{background:transparent}
+.price-card .btn-secondary{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:#fff}
+.price-card .btn-secondary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3)}
 .price-features{list-style:none}
-.price-features li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:var(--charcoal)}
-.price-features li svg{flex-shrink:0;color:var(--success);margin-top:2px}
-.price-features .soon{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:8px;background:#F3E7DE;color:#A15600;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;vertical-align:middle;flex-shrink:0}
-.price-features li.upcoming svg{color:#C9AE94}
-.price-features li.upcoming{color:var(--muted)}
+.price-features li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:rgba(255,255,255,0.85)}
+.price-features li svg{flex-shrink:0;color:#7FE2A4;margin-top:2px}
+.price-features .soon{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:8px;background:rgba(255,176,128,0.15);color:#FFB380;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;vertical-align:middle;flex-shrink:0}
+.price-features li.upcoming svg{color:rgba(127,226,164,0.4)}
+.price-features li.upcoming{color:rgba(255,255,255,0.5)}
 @media (max-width:900px){.pricing-grid{grid-template-columns:1fr;max-width:420px}}
+
+/* ─── STAT STATEMENT GIGANTE ─── */
+.stat-statement{background:var(--surface-warm);text-align:center;padding:100px 24px}
+.stat-statement-num{font-family:var(--font-display);font-variation-settings:"opsz" 144;font-size:200px;font-weight:500;line-height:1;color:var(--charcoal);letter-spacing:-0.045em;font-variant-numeric:tabular-nums;margin-bottom:8px}
+.stat-statement-text{font-size:18px;color:var(--slate);max-width:480px;margin:0 auto;line-height:1.55}
+.stat-statement-text em{font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--charcoal)}
+@media (max-width:768px){.stat-statement{padding:64px 20px}.stat-statement-num{font-size:120px}.stat-statement-text{font-size:15px}}
+
+/* ─── DEMO 3 DISPOSITIVOS INTERACTIVO ─── */
+.demo3-section{background:linear-gradient(180deg,var(--warm-bg) 0%,var(--cream-bg) 100%);position:relative;overflow:hidden}
+.demo3-section::before{content:"";position:absolute;top:20%;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,90,0,0.10) 0%,transparent 60%);filter:blur(60px);pointer-events:none}
+.demo3-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px;position:relative}
+.demo3-btn{padding:11px 20px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all 200ms var(--ease-out-soft,cubic-bezier(0.22,0.61,0.36,1));border:0.5px solid rgba(17,24,39,0.1);background:#fff;color:var(--charcoal);font-family:inherit;box-shadow:var(--shadow-sm)}
+.demo3-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:rgba(255,90,0,0.4)}
+.demo3-btn.active{background:var(--toca-orange);color:#fff;border-color:var(--toca-orange);box-shadow:0 8px 20px rgba(255,90,0,0.32)}
+.demo3-btn.done{background:#EAF7EF;color:#0F6E2F;border-color:#BCEACA}
+.demo3-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.demo3-reset{padding:11px 20px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;background:transparent;color:var(--slate);border:0;font-family:inherit;transition:color .15s}
+.demo3-reset:hover{color:var(--toca-orange)}
+.demo3-devices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1080px;margin:0 auto;position:relative}
+.demo3-device{background:var(--charcoal);border-radius:18px;padding:10px;box-shadow:var(--shadow-lg);position:relative;transition:transform .3s var(--ease-out-soft,cubic-bezier(0.22,0.61,0.36,1))}
+.demo3-device:hover{transform:translateY(-4px)}
+.demo3-device-label{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#fff;padding:5px 14px;border-radius:999px;font-size:10px;font-weight:700;letter-spacing:0.6px;color:var(--slate);border:0.5px solid rgba(17,24,39,0.1);box-shadow:var(--shadow-sm);z-index:2}
+.demo3-screen{background:var(--warm-bg);border-radius:10px;aspect-ratio:3/4.2;padding:14px;position:relative;overflow:hidden}
+.mesero-empty,.kds-empty,.caja-empty{display:flex;align-items:center;justify-content:center;height:100%;color:var(--light-gray);font-size:13px;text-align:center;padding:24px;line-height:1.5}
+.mesero-empty strong,.kds-empty strong,.caja-empty strong{color:var(--toca-orange);font-weight:600}
+.mesero-header{display:flex;align-items:center;gap:6px;margin-bottom:10px;font-size:11px}
+.mesero-mesa{font-weight:700;color:var(--charcoal)}
+.mesero-status-dot{width:5px;height:5px;border-radius:50%;background:var(--success)}
+.mesero-status{color:var(--success);font-size:9px}
+.mesero-products{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.mesero-prod{background:#fff;border:0.5px solid var(--soft-border);border-radius:7px;padding:8px 6px;text-align:center;font-size:10px;cursor:pointer;transition:all 150ms}
+.mesero-prod:hover{border-color:var(--toca-orange);transform:translateY(-1px)}
+.mesero-prod-name{font-weight:600;color:var(--charcoal);margin-bottom:2px}
+.mesero-prod-price{color:var(--toca-orange);font-weight:700;font-variant-numeric:tabular-nums}
+.mesero-cart{background:#fff;border:0.5px solid var(--soft-border);border-radius:7px;padding:8px;font-size:10px}
+.mesero-cart-title{font-weight:700;color:var(--charcoal);margin-bottom:6px;font-size:11px}
+.mesero-cart-item{display:flex;justify-content:space-between;padding:2px 0;color:var(--slate);font-variant-numeric:tabular-nums}
+.mesero-cart-total{display:flex;justify-content:space-between;padding-top:6px;margin-top:6px;border-top:0.5px solid var(--soft-border);font-weight:700;color:var(--charcoal);font-size:12px}
+.mesero-cart-total-num{color:var(--toca-orange);font-family:var(--font-display);font-weight:500;font-variant-numeric:tabular-nums;font-size:16px}
+.kds-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.kds-title{font-family:var(--font-display);font-size:13px;font-weight:500;color:var(--charcoal)}
+.kds-count{font-size:10px;color:var(--toca-orange);font-weight:600}
+.kds-ticket{background:#fff;border:0.5px solid var(--soft-border);border-left:3px solid var(--success);border-radius:7px;padding:9px;font-size:10px;margin-bottom:6px;transition:all 320ms var(--ease-out-soft,cubic-bezier(0.22,0.61,0.36,1));opacity:0;transform:translateX(-12px)}
+.kds-ticket.in{opacity:1;transform:translateX(0)}
+.kds-ticket.done{border-left-color:#BCEACA;background:#F6FCF8;opacity:0.8}
+.kds-ticket-head{display:flex;justify-content:space-between;font-weight:700;color:var(--charcoal);margin-bottom:5px;font-size:11px}
+.kds-ticket-time{font-family:var(--font-display);color:var(--success);font-variant-numeric:tabular-nums}
+.kds-ticket-item{color:var(--slate);padding:2px 0}
+.kds-ticket-btn{display:block;margin-top:8px;padding:7px;background:var(--toca-orange);color:#fff;text-align:center;border-radius:6px;font-weight:700;font-size:10px;cursor:pointer;letter-spacing:0.3px}
+.kds-ticket.done .kds-ticket-btn{background:var(--success);pointer-events:none}
+.caja-card{background:#fff;border:0.5px solid var(--soft-border);border-radius:8px;padding:11px;font-size:10px;opacity:0;transform:translateY(10px);transition:all 380ms var(--ease-out-soft,cubic-bezier(0.22,0.61,0.36,1))}
+.caja-card.in{opacity:1;transform:translateY(0)}
+.caja-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.caja-card-mesa{font-family:var(--font-display);font-weight:500;color:var(--charcoal);font-size:13px}
+.caja-card-status{padding:3px 8px;background:#FFEDE0;color:#993C1D;border-radius:999px;font-size:8px;font-weight:700;letter-spacing:0.4px}
+.caja-card-items{color:var(--slate);padding:3px 0;border-top:0.5px solid var(--divider);padding-top:6px;margin-top:5px;line-height:1.6}
+.caja-card-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:7px;border-top:0.5px solid var(--soft-border)}
+.caja-card-total-label{font-size:11px;font-weight:700;color:var(--charcoal)}
+.caja-card-total-num{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--toca-orange);font-variant-numeric:tabular-nums}
+.caja-card-cobrar{margin-top:8px;padding:9px;background:var(--toca-orange);color:#fff;text-align:center;border-radius:7px;font-weight:700;font-size:11px;cursor:pointer;transition:all 200ms;letter-spacing:0.3px}
+.caja-card-cobrar:hover{background:var(--toca-orange-deep);transform:translateY(-1px)}
+.caja-card-cobrar.paid{background:var(--success);pointer-events:none}
+.demo3-status{margin-top:24px;text-align:center;font-size:14px;color:var(--slate);min-height:20px;font-family:var(--font-display);font-style:italic;font-weight:400}
+.demo3-status strong{color:var(--toca-orange);font-weight:600;font-style:normal}
+@keyframes demo3-confetti{0%{transform:scale(0) translateY(0);opacity:1}100%{transform:scale(1) translateY(-40px);opacity:0}}
+.demo3-confetti{position:absolute;width:7px;height:7px;border-radius:50%;pointer-events:none;animation:demo3-confetti 900ms ease-out forwards}
+@media (max-width:780px){.demo3-devices{grid-template-columns:1fr;max-width:380px;gap:32px}.demo3-screen{aspect-ratio:3/3.6}}
 
 .faq-section{background:var(--warm-bg)}
 .faq-grid{max-width:780px;margin:0 auto}
@@ -354,36 +463,105 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
             </svg>
           </div>
         </div>
-        <!-- Phone KDS detrás -->
-        <div class="phone-kds-mock" aria-hidden="true">
-          <div class="phone-kds-screen">
-            <svg viewBox="0 0 130 230" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
-              <rect width="130" height="230" fill="#111827"/>
-              <text x="10" y="16" font-family="Inter" font-size="7" font-weight="700" fill="#FF8A40">COCINA · 3</text>
-              <text x="120" y="16" text-anchor="end" font-family="Inter" font-size="6" fill="#9CA3AF">12:42</text>
-              <!-- Ticket verde -->
-              <rect x="8" y="24" width="114" height="58" rx="6" fill="#1F2937" stroke="#16A34A" stroke-width="1.5"/>
-              <text x="14" y="38" font-family="Inter" font-size="6" font-weight="700" fill="#fff">Mesa 4 · 2:35</text>
-              <text x="14" y="50" font-family="Inter" font-size="5.5" fill="#D1D5DB">2× Pastor</text>
-              <text x="14" y="59" font-family="Inter" font-size="5.5" fill="#D1D5DB">1× Suadero</text>
-              <text x="14" y="68" font-family="Inter" font-size="5.5" fill="#D1D5DB">1× Jamaica</text>
-              <rect x="14" y="73" width="60" height="6" rx="3" fill="#16A34A"/>
-              <!-- Ticket amarillo -->
-              <rect x="8" y="88" width="114" height="58" rx="6" fill="#1F2937" stroke="#F59E0B" stroke-width="1.5"/>
-              <text x="14" y="102" font-family="Inter" font-size="6" font-weight="700" fill="#fff">Llevar · 6:12</text>
-              <text x="14" y="114" font-family="Inter" font-size="5.5" fill="#D1D5DB">3× Bistec</text>
-              <text x="14" y="123" font-family="Inter" font-size="5.5" fill="#D1D5DB">2× Coca-Cola</text>
-              <text x="14" y="132" font-family="Inter" font-size="5.5" fill="#FCD34D">⚠ va tardando</text>
-              <!-- Ticket rojo -->
-              <rect x="8" y="152" width="114" height="68" rx="6" fill="#1F2937" stroke="#DC2626" stroke-width="1.5"/>
-              <text x="14" y="166" font-family="Inter" font-size="6" font-weight="700" fill="#fff">Mesa 7 · 11:48</text>
-              <text x="14" y="178" font-family="Inter" font-size="5.5" fill="#D1D5DB">1× Campechano</text>
-              <text x="14" y="187" font-family="Inter" font-size="5.5" fill="#D1D5DB">1× Quesadilla</text>
-              <text x="14" y="196" font-family="Inter" font-size="5.5" fill="#FCA5A5">⚠ urgente</text>
-              <rect x="14" y="201" width="100" height="12" rx="6" fill="#DC2626"/>
-              <text x="64" y="210" text-anchor="middle" font-family="Inter" font-size="6" font-weight="700" fill="#fff">Marcar listo</text>
-            </svg>
-          </div>
+        <!-- Impresora térmica con ticket animado saliendo en loop -->
+        <div class="printer-mock" aria-hidden="true">
+          <svg viewBox="0 0 180 260" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+            <defs>
+              <clipPath id="ticketClip">
+                <rect x="40" y="20" width="100" height="150"/>
+              </clipPath>
+              <linearGradient id="printerBodyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2C2C2A"/>
+                <stop offset="100%" stop-color="#1A1A18"/>
+              </linearGradient>
+              <linearGradient id="printerTopGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3A3A38"/>
+                <stop offset="100%" stop-color="#252523"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Ticket saliendo de la ranura (animado) -->
+            <g clip-path="url(#ticketClip)">
+              <g class="printer-ticket-anim">
+                <rect x="48" y="20" width="84" height="140" rx="2" fill="#FFFEFB" stroke="#E5DBC9" stroke-width="0.5"/>
+                <!-- Bordes dentados arriba del ticket -->
+                <path d="M48,20 L52,18 L56,20 L60,18 L64,20 L68,18 L72,20 L76,18 L80,20 L84,18 L88,20 L92,18 L96,20 L100,18 L104,20 L108,18 L112,20 L116,18 L120,20 L124,18 L128,20 L132,20" fill="#FFFEFB"/>
+                <!-- Logo cloche tiny -->
+                <rect x="78" y="28" width="24" height="20" rx="3" fill="#FF5A00"/>
+                <circle cx="90" cy="36" r="1.2" fill="#fff"/>
+                <path d="M84,42 a6,6 0 0,1 12,0 z" fill="#fff"/>
+                <rect x="83" y="42" width="14" height="1.5" rx="0.7" fill="#fff"/>
+                <text x="90" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="6.5" font-weight="500" fill="#111827">tacos güero</text>
+                <text x="90" y="65" text-anchor="middle" font-family="Inter" font-size="4" fill="#6B7280">13 mayo · 18:42</text>
+                <line x1="52" y1="69" x2="128" y2="69" stroke="#D1C7B7" stroke-dasharray="1 1"/>
+                <text x="52" y="78" font-family="Inter" font-size="4.5" fill="#111827" font-weight="600">Mesa 4</text>
+                <text x="128" y="78" text-anchor="end" font-family="Inter" font-size="4.5" fill="#6B7280">Adrián M.</text>
+                <text x="52" y="89" font-family="Inter" font-size="4.5" fill="#111827">2× Pastor</text>
+                <text x="128" y="89" text-anchor="end" font-family="Inter" font-size="4.5" font-weight="600" fill="#111827">$36</text>
+                <text x="52" y="98" font-family="Inter" font-size="4.5" fill="#111827">1× Coca</text>
+                <text x="128" y="98" text-anchor="end" font-family="Inter" font-size="4.5" font-weight="600" fill="#111827">$25</text>
+                <line x1="52" y1="103" x2="128" y2="103" stroke="#D1C7B7"/>
+                <text x="52" y="113" font-family="Inter" font-size="5.5" font-weight="700" fill="#111827">TOTAL</text>
+                <text x="128" y="113" text-anchor="end" font-family="Georgia,serif" font-size="8" font-weight="500" fill="#FF5A00">$61.00</text>
+                <line x1="52" y1="118" x2="128" y2="118" stroke="#D1C7B7" stroke-dasharray="1 1"/>
+                <text x="90" y="128" text-anchor="middle" font-family="Inter" font-size="4" fill="#6B7280">¡Gracias por tu visita!</text>
+                <text x="90" y="135" text-anchor="middle" font-family="Inter" font-size="3.5" fill="#9CA3AF">tocaycobra.com.mx</text>
+                <!-- Código de barras tiny -->
+                <g fill="#111827">
+                  <rect x="64" y="142" width="0.6" height="8"/>
+                  <rect x="66" y="142" width="0.4" height="8"/>
+                  <rect x="68" y="142" width="0.8" height="8"/>
+                  <rect x="71" y="142" width="0.4" height="8"/>
+                  <rect x="73" y="142" width="0.6" height="8"/>
+                  <rect x="76" y="142" width="0.4" height="8"/>
+                  <rect x="78" y="142" width="1" height="8"/>
+                  <rect x="81" y="142" width="0.6" height="8"/>
+                  <rect x="84" y="142" width="0.4" height="8"/>
+                  <rect x="86" y="142" width="0.6" height="8"/>
+                  <rect x="89" y="142" width="0.8" height="8"/>
+                  <rect x="92" y="142" width="0.4" height="8"/>
+                  <rect x="94" y="142" width="0.6" height="8"/>
+                  <rect x="97" y="142" width="1" height="8"/>
+                  <rect x="100" y="142" width="0.4" height="8"/>
+                  <rect x="102" y="142" width="0.6" height="8"/>
+                  <rect x="105" y="142" width="0.4" height="8"/>
+                  <rect x="107" y="142" width="0.8" height="8"/>
+                  <rect x="110" y="142" width="0.6" height="8"/>
+                  <rect x="113" y="142" width="0.4" height="8"/>
+                  <rect x="115" y="142" width="0.6" height="8"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- Cuerpo impresora térmica -->
+            <g class="printer-body">
+              <!-- Sombra base -->
+              <ellipse cx="90" cy="248" rx="76" ry="6" fill="#000" opacity="0.15"/>
+              <!-- Cuerpo principal -->
+              <rect x="20" y="160" width="140" height="80" rx="10" fill="url(#printerBodyGrad)"/>
+              <!-- Tapa superior con ranura -->
+              <rect x="14" y="150" width="152" height="24" rx="6" fill="url(#printerTopGrad)"/>
+              <!-- Ranura del papel (donde sale) -->
+              <rect x="38" y="160" width="104" height="6" rx="1" fill="#0A0A09"/>
+              <rect x="40" y="161" width="100" height="0.6" fill="#1F1F1D"/>
+              <!-- Detalle estriado de la ranura -->
+              <g fill="#0A0A09">
+                <rect x="42" y="164" width="96" height="0.5"/>
+              </g>
+              <!-- Panel frontal con LED + botón -->
+              <rect x="40" y="200" width="100" height="28" rx="3" fill="#0F0F0E"/>
+              <!-- LED status verde parpadeante -->
+              <circle class="printer-led" cx="54" cy="214" r="3" fill="#16A34A"/>
+              <circle class="printer-led" cx="54" cy="214" r="4.5" fill="#16A34A" opacity="0.3"/>
+              <!-- Label brand -->
+              <text x="68" y="217" font-family="Inter" font-size="6" font-weight="600" fill="#FFB380" letter-spacing="0.6">TOCA · POS</text>
+              <!-- Botón papel -->
+              <circle cx="128" cy="214" r="4" fill="#1A1A18" stroke="#3A3A38" stroke-width="0.5"/>
+              <circle cx="128" cy="214" r="1.5" fill="#FF5A00"/>
+              <!-- Texto modelo lateral -->
+              <text x="148" y="172" font-family="Inter" font-size="3.5" fill="#6B6B68" letter-spacing="0.4" transform="rotate(90 148 172)">TM-T20</text>
+            </g>
+          </svg>
         </div>
       </div>
     </div>
@@ -691,6 +869,95 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
   </div>
 </section>
 
+<section class="demo3-section">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow" style="margin-bottom:14px"><span class="eyebrow-dot"></span> Interactivo · pruébalo tú</div>
+      <h2>Mira cómo se <em style="font-family:var(--font-display);font-style:italic;font-weight:400;color:var(--toca-orange)">conectan</em>.</h2>
+      <p>3 dispositivos, 1 negocio. Mesero toma la orden, cocina la prepara, caja la cobra. Todo en vivo — aunque se caiga el internet. Dispara los pasos abajo.</p>
+    </div>
+    <div class="demo3-controls">
+      <button class="demo3-btn" id="demo3Btn1">1 · Tomar orden</button>
+      <button class="demo3-btn" id="demo3Btn2" disabled>2 · Enviar a cocina</button>
+      <button class="demo3-btn" id="demo3Btn3" disabled>3 · Marcar listo</button>
+      <button class="demo3-btn" id="demo3Btn4" disabled>4 · Cobrar</button>
+      <button class="demo3-reset" id="demo3Reset">↺ Reiniciar</button>
+    </div>
+    <div class="demo3-devices">
+      <div class="demo3-device">
+        <span class="demo3-device-label">MESERO · TABLET</span>
+        <div class="demo3-screen" id="demo3ScreenMesero">
+          <div class="mesero-empty" id="demo3MeseroEmpty">Toca <strong>"1 · Tomar orden"</strong> para empezar</div>
+          <div id="demo3MeseroContent" style="display:none">
+            <div class="mesero-header">
+              <span class="mesero-mesa">Mesa 4</span>
+              <span class="mesero-status-dot"></span>
+              <span class="mesero-status">Conectado</span>
+            </div>
+            <div class="mesero-products">
+              <div class="mesero-prod"><div class="mesero-prod-name">Pastor</div><div class="mesero-prod-price">$18</div></div>
+              <div class="mesero-prod"><div class="mesero-prod-name">Suadero</div><div class="mesero-prod-price">$20</div></div>
+              <div class="mesero-prod"><div class="mesero-prod-name">Coca</div><div class="mesero-prod-price">$25</div></div>
+              <div class="mesero-prod"><div class="mesero-prod-name">Agua</div><div class="mesero-prod-price">$15</div></div>
+            </div>
+            <div class="mesero-cart">
+              <div class="mesero-cart-title">Tu venta</div>
+              <div class="mesero-cart-item"><span>2× Pastor</span><span style="color:var(--charcoal);font-weight:600">$36</span></div>
+              <div class="mesero-cart-item"><span>1× Coca</span><span style="color:var(--charcoal);font-weight:600">$25</span></div>
+              <div class="mesero-cart-total"><span>Total</span><span class="mesero-cart-total-num">$61</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="demo3-device">
+        <span class="demo3-device-label">COCINA · KDS</span>
+        <div class="demo3-screen" id="demo3ScreenKds">
+          <div class="kds-header">
+            <span class="kds-title">Cocina</span>
+            <span class="kds-count" id="demo3KdsCount">0 tickets</span>
+          </div>
+          <div class="kds-empty" id="demo3KdsEmpty">Esperando comandas…</div>
+          <div class="kds-ticket" id="demo3KdsTicket">
+            <div class="kds-ticket-head"><span>Mesa 4</span><span class="kds-ticket-time" id="demo3KdsTime">0:00</span></div>
+            <div class="kds-ticket-item">• 2× Pastor</div>
+            <div class="kds-ticket-item">• 1× Coca</div>
+            <div class="kds-ticket-btn" id="demo3KdsBtn">Marcar listo</div>
+          </div>
+        </div>
+      </div>
+      <div class="demo3-device">
+        <span class="demo3-device-label">CAJA · TABLET</span>
+        <div class="demo3-screen" id="demo3ScreenCaja">
+          <div class="caja-empty" id="demo3CajaEmpty">Las mesas listas aparecerán aquí</div>
+          <div class="caja-card" id="demo3CajaCard">
+            <div class="caja-card-head">
+              <span class="caja-card-mesa">Mesa 4</span>
+              <span class="caja-card-status">LISTA</span>
+            </div>
+            <div class="caja-card-items">
+              <div>2× Pastor</div>
+              <div>1× Coca</div>
+            </div>
+            <div class="caja-card-total">
+              <span class="caja-card-total-label">Total</span>
+              <span class="caja-card-total-num">$61</span>
+            </div>
+            <div class="caja-card-cobrar" id="demo3CajaCobrar">Cobrar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="demo3-status" id="demo3Status">Listo para empezar.</div>
+  </div>
+</section>
+
+<section class="stat-statement">
+  <div class="container">
+    <div class="stat-statement-num">$0</div>
+    <p class="stat-statement-text">lo que pagas para empezar. <em>Sin tarjeta</em>, sin compromiso, sin asterisco.</p>
+  </div>
+</section>
+
 <section id="pricing" class="pricing-section">
   <div class="container">
     <div class="section-header">
@@ -854,6 +1121,79 @@ document.querySelectorAll('.toggle-btn').forEach(btn=>{
     document.querySelectorAll('.meta-yearly').forEach(m=>{m.style.display=billing==='yearly'?'inline':'none';});
   });
 });
+
+// ─── DEMO 3 DISPOSITIVOS INTERACTIVO ───
+(function(){
+  const $ = id => document.getElementById(id);
+  const btns = [$('demo3Btn1'), $('demo3Btn2'), $('demo3Btn3'), $('demo3Btn4')];
+  const status = $('demo3Status');
+  if (!btns[0]) return;
+  let timer = null;
+  function setStatus(t){ status.innerHTML = t; }
+  function setActive(idx){
+    btns.forEach((b,i)=>{ b.classList.remove('active'); if(i<idx) b.classList.add('done'); if(i===idx) b.classList.add('active'); });
+  }
+  function enableBtn(idx){ btns.forEach((b,i)=>{ b.disabled = (i !== idx); }); }
+  function reset(){
+    $('demo3MeseroEmpty').style.display = 'flex';
+    $('demo3MeseroContent').style.display = 'none';
+    $('demo3KdsEmpty').style.display = 'flex';
+    $('demo3KdsTicket').classList.remove('in','done');
+    $('demo3KdsBtn').textContent = 'Marcar listo';
+    $('demo3KdsCount').textContent = '0 tickets';
+    $('demo3CajaEmpty').style.display = 'flex';
+    $('demo3CajaCard').classList.remove('in');
+    $('demo3CajaCobrar').classList.remove('paid');
+    $('demo3CajaCobrar').textContent = 'Cobrar';
+    $('demo3KdsTime').textContent = '0:00';
+    btns.forEach(b=>{ b.classList.remove('active','done'); b.disabled = true; });
+    btns[0].disabled = false;
+    if(timer){ clearInterval(timer); timer = null; }
+    setStatus('Listo para empezar.');
+  }
+  btns[0].onclick = ()=>{
+    $('demo3MeseroEmpty').style.display = 'none';
+    $('demo3MeseroContent').style.display = 'block';
+    setStatus('El <strong>mesero</strong> toma la orden de Mesa 4.');
+    setActive(0); enableBtn(1);
+  };
+  btns[1].onclick = ()=>{
+    $('demo3KdsEmpty').style.display = 'none';
+    $('demo3KdsTicket').classList.add('in');
+    $('demo3KdsCount').textContent = '1 ticket';
+    setStatus('La comanda viaja a <strong>cocina</strong> al instante. Sin internet siquiera.');
+    setActive(1); enableBtn(2);
+    let s = 0;
+    timer = setInterval(()=>{ s++; const mm = Math.floor(s/60), ss = s%60; $('demo3KdsTime').textContent = mm+':'+String(ss).padStart(2,'0'); }, 1000);
+  };
+  btns[2].onclick = ()=>{
+    $('demo3KdsTicket').classList.add('done');
+    $('demo3KdsBtn').textContent = '✓ Listo';
+    if(timer){ clearInterval(timer); timer = null; }
+    $('demo3CajaEmpty').style.display = 'none';
+    $('demo3CajaCard').classList.add('in');
+    setStatus('Cocina marca listo. <strong>Caja</strong> ve Mesa 4 lista para cobrar.');
+    setActive(2); enableBtn(3);
+  };
+  btns[3].onclick = ()=>{
+    $('demo3CajaCobrar').classList.add('paid');
+    $('demo3CajaCobrar').textContent = '✓ Cobrado';
+    setStatus('Mesa 4 cerrada en <strong>$61</strong>. Ticket impreso, reporte actualizado.');
+    setActive(3); btns[3].disabled = true;
+    const colors = ['#FF5A00','#FFB380','#FFCFB3','#FF8A40'];
+    for(let i=0;i<10;i++){
+      const p = document.createElement('div');
+      p.className = 'demo3-confetti';
+      p.style.background = colors[i%4];
+      p.style.left = (45 + (Math.random()*30-15)) + '%';
+      p.style.top = '50%';
+      $('demo3ScreenCaja').appendChild(p);
+      setTimeout(()=>p.remove(), 1100);
+    }
+  };
+  $('demo3Reset').onclick = reset;
+  reset();
+})();
 </script>
 </body>
 </html>
