@@ -119,13 +119,14 @@ section{padding:100px 0}
 
 .howto-section{background:var(--surface-warm);position:relative;overflow:hidden}
 .howto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
-.howto-step{position:relative;background:var(--surface-white);border:1px solid var(--soft-border);border-radius:18px;padding:28px 24px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+.howto-step{position:relative;background:var(--surface-white);border:1px solid var(--soft-border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
 .howto-step:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.howto-num{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--toca-orange);color:#fff;font-family:var(--font-display);font-size:18px;font-weight:500;margin-bottom:18px;box-shadow:0 4px 10px rgba(255,90,0,0.22)}
-.howto-step h3{font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:-0.01em;margin-bottom:8px;color:var(--charcoal)}
+.howto-mockup{height:180px;background:var(--warm-bg);display:flex;align-items:center;justify-content:center;padding:14px;border-bottom:1px solid var(--soft-border);position:relative;overflow:hidden}
+.howto-mockup svg{max-width:100%;max-height:100%;display:block}
+.howto-content{padding:18px 22px 22px;position:relative}
+.howto-num{position:absolute;top:-18px;left:22px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--toca-orange);color:#fff;font-family:var(--font-display);font-size:18px;font-weight:500;box-shadow:0 4px 10px rgba(255,90,0,0.28),0 0 0 4px var(--surface-white)}
+.howto-step h3{font-family:var(--font-display);font-size:19px;font-weight:500;letter-spacing:-0.01em;margin:14px 0 6px;color:var(--charcoal)}
 .howto-step p{color:var(--slate);font-size:14px;line-height:1.55}
-.howto-step::after{content:"→";position:absolute;right:-18px;top:50%;transform:translateY(-50%);color:var(--toca-orange-border);font-size:24px;font-weight:300}
-.howto-step:last-child::after{display:none}
 @media (max-width:900px){.howto-grid{grid-template-columns:repeat(2,1fr)}.howto-step:nth-child(2)::after,.howto-step:last-child::after{display:none}}
 @media (max-width:560px){.howto-grid{grid-template-columns:1fr}.howto-step::after{display:none}}
 
@@ -294,11 +295,11 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
                 <circle cx="22" cy="237" r="4"/>
               </g>
               <!-- Header app -->
-              <text x="104" y="22" font-family="Inter" font-size="8" font-weight="700" fill="#111827">tacos güero</text>
-              <circle cx="142" cy="20" r="2" fill="#16A34A"/>
-              <text x="148" y="22" font-family="Inter" font-size="7" fill="#6B7280">Online</text>
+              <text x="104" y="20" font-family="Inter" font-size="9" font-weight="700" fill="#111827">tacos güero</text>
+              <circle cx="106" cy="30" r="1.8" fill="#16A34A"/>
+              <text x="112" y="32" font-family="Inter" font-size="7" fill="#6B7280">Online</text>
               <text x="540" y="22" font-family="Inter" font-size="7" font-weight="500" fill="#6B7280">Adrián M.</text>
-              <line x1="104" y1="32" x2="584" y2="32" stroke="#F3E7DE"/>
+              <line x1="104" y1="40" x2="584" y2="40" stroke="#F3E7DE"/>
               <!-- Hero saludo Fraunces-like (sin Fraunces real en SVG, uso Inter pero serif via font-family Georgia) -->
               <text x="104" y="55" font-family="Georgia,serif" font-size="17" font-weight="500" fill="#111827" letter-spacing="-0.3">Buenas tardes, Adrián</text>
               <text x="104" y="69" font-family="Inter" font-size="8" fill="#6B7280">Resumen del día · 13 mayo</text>
@@ -455,25 +456,165 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <p>Cuatro pasos. Ninguno técnico. Sin instalaciones complicadas, sin contadores que llamar.</p>
     </div>
     <div class="howto-grid">
+      <!-- Paso 1: Play Store -->
       <div class="howto-step">
-        <div class="howto-num">1</div>
-        <h3>Descarga la app</h3>
-        <p>Desde Google Play, en cualquier tablet o celular Android que ya tengas en el negocio. Pesa menos de 50 MB.</p>
+        <div class="howto-mockup">
+          <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="180" rx="10" fill="#fff" stroke="#EFE4DA"/>
+            <rect x="0" y="0" width="200" height="22" fill="#F5F5F7"/>
+            <text x="12" y="14" font-family="Inter" font-size="7" font-weight="700" fill="#5F6368">Google Play</text>
+            <circle cx="190" cy="11" r="2" fill="#9CA3AF"/>
+            <rect x="16" y="36" width="44" height="44" rx="9" fill="#FF5A00"/>
+            <line x1="32" y1="44" x2="32" y2="46" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/>
+            <line x1="38" y1="42" x2="38" y2="46" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity="0.75"/>
+            <line x1="44" y1="44" x2="44" y2="46" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/>
+            <circle cx="38" cy="49" r="1.3" fill="#fff"/>
+            <path d="M27 64a11 11 0 0122 0H27z" fill="#fff"/>
+            <rect x="25" y="64" width="26" height="2.2" rx="1" fill="#fff"/>
+            <text x="68" y="50" font-family="Inter" font-size="10" font-weight="700" fill="#111827">Toca y Cobra</text>
+            <text x="68" y="62" font-family="Inter" font-size="7" fill="#6B7280">POS para tu negocio</text>
+            <g font-family="Inter" font-size="6.5" font-weight="600" fill="#FF8800">
+              <text x="68" y="74">★★★★★</text>
+              <text x="106" y="74" fill="#6B7280" font-weight="500">4.9 · 1.2K reseñas</text>
+            </g>
+            <rect x="16" y="98" width="168" height="30" rx="15" fill="#16A34A"/>
+            <text x="100" y="117" text-anchor="middle" font-family="Inter" font-size="11" font-weight="700" fill="#fff">Instalar</text>
+            <text x="16" y="148" font-family="Inter" font-size="7" fill="#6B7280">Pesa 48 MB · Android 8 o superior</text>
+            <text x="16" y="162" font-family="Inter" font-size="7" fill="#6B7280">Compatible con tu tablet o celular</text>
+          </svg>
+        </div>
+        <div class="howto-content">
+          <div class="howto-num">1</div>
+          <h3>Descarga la app</h3>
+          <p>Desde Google Play, en cualquier tablet o celular Android que ya tengas. Pesa menos de 50 MB.</p>
+        </div>
       </div>
+
+      <!-- Paso 2: Setup negocio -->
       <div class="howto-step">
-        <div class="howto-num">2</div>
-        <h3>Da de alta tu negocio</h3>
-        <p>Pones el nombre, eliges si es restaurante o tienda, y agregas tu primer producto. Te toma un minuto.</p>
+        <div class="howto-mockup">
+          <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="180" rx="10" fill="#fff" stroke="#EFE4DA"/>
+            <text x="16" y="22" font-family="Georgia,serif" font-size="11" font-weight="500" fill="#111827">Cuéntanos de tu negocio</text>
+            <text x="16" y="34" font-family="Inter" font-size="6.5" fill="#6B7280">Paso 1 de 3</text>
+            <rect x="16" y="42" width="84" height="2.5" rx="1" fill="#FF5A00"/>
+            <rect x="100" y="42" width="84" height="2.5" rx="1" fill="#EFE4DA"/>
+            <text x="16" y="60" font-family="Inter" font-size="6.5" font-weight="600" fill="#4B5563">NOMBRE DEL NEGOCIO</text>
+            <rect x="16" y="64" width="168" height="18" rx="5" fill="#FFF9F4" stroke="#FF5A00" stroke-width="1.2"/>
+            <text x="22" y="76" font-family="Inter" font-size="8" font-weight="600" fill="#111827">Tacos Güero</text>
+            <text x="178" y="76" text-anchor="end" font-family="Inter" font-size="7" fill="#FF5A00">|</text>
+            <text x="16" y="98" font-family="Inter" font-size="6.5" font-weight="600" fill="#4B5563">GIRO</text>
+            <rect x="16" y="102" width="48" height="18" rx="9" fill="#FF5A00"/>
+            <text x="40" y="114" text-anchor="middle" font-family="Inter" font-size="7" font-weight="600" fill="#fff">Restaurante</text>
+            <rect x="68" y="102" width="38" height="18" rx="9" fill="#fff" stroke="#EFE4DA"/>
+            <text x="87" y="114" text-anchor="middle" font-family="Inter" font-size="7" font-weight="500" fill="#6B7280">Tienda</text>
+            <rect x="110" y="102" width="48" height="18" rx="9" fill="#fff" stroke="#EFE4DA"/>
+            <text x="134" y="114" text-anchor="middle" font-family="Inter" font-size="7" font-weight="500" fill="#6B7280">Cafetería</text>
+            <text x="16" y="136" font-family="Inter" font-size="6.5" font-weight="600" fill="#4B5563">PRIMER PRODUCTO</text>
+            <rect x="16" y="140" width="168" height="18" rx="5" fill="#fff" stroke="#EFE4DA"/>
+            <text x="22" y="152" font-family="Inter" font-size="7" fill="#9CA3AF">Taco al pastor — $18</text>
+            <rect x="120" y="164" width="64" height="14" rx="7" fill="#FF5A00"/>
+            <text x="152" y="174" text-anchor="middle" font-family="Inter" font-size="7" font-weight="700" fill="#fff">Siguiente →</text>
+          </svg>
+        </div>
+        <div class="howto-content">
+          <div class="howto-num">2</div>
+          <h3>Da de alta tu negocio</h3>
+          <p>Nombre, giro, primer producto. Tres campos y te toma menos de un minuto. Listo para abrir.</p>
+        </div>
       </div>
+
+      <!-- Paso 3: Venta -->
       <div class="howto-step">
-        <div class="howto-num">3</div>
-        <h3>Empieza a cobrar</h3>
-        <p>Tu equipo se conecta con un código QR. Cada quien con su PIN, cada quien con sus ventas. Listo para abrir el día.</p>
+        <div class="howto-mockup">
+          <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="180" rx="10" fill="#FFF9F4"/>
+            <text x="10" y="16" font-family="Inter" font-size="8" font-weight="700" fill="#111827">Venta · Mesa 3</text>
+            <text x="190" y="16" text-anchor="end" font-family="Inter" font-size="7" fill="#16A34A">● Conectado</text>
+            <!-- Grid productos -->
+            <rect x="8" y="24" width="38" height="38" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <rect x="14" y="28" width="26" height="14" rx="3" fill="#FFCFB3"/>
+            <text x="27" y="55" text-anchor="middle" font-family="Inter" font-size="6" font-weight="600" fill="#111827">Pastor</text>
+            <text x="27" y="62" text-anchor="middle" font-family="Inter" font-size="5.5" fill="#FF5A00" font-weight="700">$18</text>
+            <rect x="50" y="24" width="38" height="38" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <rect x="56" y="28" width="26" height="14" rx="3" fill="#FFE4D2"/>
+            <text x="69" y="55" text-anchor="middle" font-family="Inter" font-size="6" font-weight="600" fill="#111827">Suadero</text>
+            <text x="69" y="62" text-anchor="middle" font-family="Inter" font-size="5.5" fill="#FF5A00" font-weight="700">$20</text>
+            <rect x="92" y="24" width="38" height="38" rx="6" fill="#fff" stroke="#FF5A00" stroke-width="1.5"/>
+            <rect x="98" y="28" width="26" height="14" rx="3" fill="#FFB380"/>
+            <text x="111" y="55" text-anchor="middle" font-family="Inter" font-size="6" font-weight="600" fill="#111827">Bistec</text>
+            <text x="111" y="62" text-anchor="middle" font-family="Inter" font-size="5.5" fill="#FF5A00" font-weight="700">$22</text>
+            <rect x="8" y="68" width="38" height="38" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <rect x="14" y="72" width="26" height="14" rx="3" fill="#7AB8E8"/>
+            <text x="27" y="99" text-anchor="middle" font-family="Inter" font-size="6" font-weight="600" fill="#111827">Agua</text>
+            <text x="27" y="106" text-anchor="middle" font-family="Inter" font-size="5.5" fill="#FF5A00" font-weight="700">$15</text>
+            <rect x="50" y="68" width="38" height="38" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <rect x="56" y="72" width="26" height="14" rx="3" fill="#E94F00"/>
+            <text x="69" y="99" text-anchor="middle" font-family="Inter" font-size="6" font-weight="600" fill="#111827">Coca</text>
+            <text x="69" y="106" text-anchor="middle" font-family="Inter" font-size="5.5" fill="#FF5A00" font-weight="700">$25</text>
+            <!-- Carrito derecho -->
+            <rect x="138" y="22" width="54" height="148" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <text x="144" y="35" font-family="Inter" font-size="7" font-weight="700" fill="#111827">Tu venta</text>
+            <text x="144" y="49" font-family="Inter" font-size="6" fill="#4B5563">3× Pastor</text>
+            <text x="186" y="49" text-anchor="end" font-family="Inter" font-size="6" font-weight="600" fill="#111827">$54</text>
+            <text x="144" y="60" font-family="Inter" font-size="6" fill="#4B5563">1× Bistec</text>
+            <text x="186" y="60" text-anchor="end" font-family="Inter" font-size="6" font-weight="600" fill="#111827">$22</text>
+            <text x="144" y="71" font-family="Inter" font-size="6" fill="#4B5563">1× Agua</text>
+            <text x="186" y="71" text-anchor="end" font-family="Inter" font-size="6" font-weight="600" fill="#111827">$15</text>
+            <line x1="144" y1="78" x2="186" y2="78" stroke="#EFE4DA"/>
+            <text x="144" y="92" font-family="Inter" font-size="7" font-weight="700" fill="#111827">Total</text>
+            <text x="186" y="92" text-anchor="end" font-family="Inter" font-size="9" font-weight="700" fill="#FF5A00">$91</text>
+            <rect x="144" y="148" width="42" height="18" rx="9" fill="#FF5A00"/>
+            <text x="165" y="160" text-anchor="middle" font-family="Inter" font-size="7" font-weight="700" fill="#fff">Cobrar</text>
+          </svg>
+        </div>
+        <div class="howto-content">
+          <div class="howto-num">3</div>
+          <h3>Empieza a cobrar</h3>
+          <p>Tu equipo se conecta con QR. Cada quien con su PIN, cada quien con sus ventas. Tres toques para cerrar cada cobro.</p>
+        </div>
       </div>
+
+      <!-- Paso 4: Dashboard + Pulso IA -->
       <div class="howto-step">
-        <div class="howto-num">4</div>
-        <h3>Revisa tu negocio</h3>
-        <p>Al cierre del día Pulso IA te entrega un resumen claro: cuánto vendiste, qué se movió más, qué necesita tu atención mañana.</p>
+        <div class="howto-mockup">
+          <svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="180" rx="10" fill="#FFF9F4"/>
+            <text x="10" y="18" font-family="Georgia,serif" font-size="10" font-weight="500" fill="#111827">Buenas tardes, Adrián</text>
+            <text x="10" y="28" font-family="Inter" font-size="6.5" fill="#6B7280">Cierre del día · 13 mayo</text>
+            <!-- 2 KPI cards -->
+            <rect x="10" y="36" width="88" height="40" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <text x="18" y="48" font-family="Inter" font-size="6" font-weight="700" fill="#6B7280" letter-spacing="0.4">VENTA HOY</text>
+            <text x="18" y="64" font-family="Inter" font-size="13" font-weight="700" fill="#111827">$24,840</text>
+            <text x="18" y="73" font-family="Inter" font-size="6" font-weight="600" fill="#16A34A">▲ +14% vs ayer</text>
+            <rect x="102" y="36" width="88" height="40" rx="6" fill="#fff" stroke="#EFE4DA"/>
+            <text x="110" y="48" font-family="Inter" font-size="6" font-weight="700" fill="#6B7280" letter-spacing="0.4">META 78%</text>
+            <rect x="110" y="54" width="74" height="4" rx="2" fill="#FFEDE0"/>
+            <rect x="110" y="54" width="58" height="4" rx="2" fill="#FF5A00"/>
+            <text x="110" y="73" font-family="Inter" font-size="6.5" fill="#6B7280">Faltan $5,160 para cerrar</text>
+            <!-- Pulso IA card -->
+            <rect x="10" y="84" width="180" height="64" rx="8" fill="url(#pulsoGrad2)" stroke="#FFD0A8"/>
+            <defs>
+              <linearGradient id="pulsoGrad2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#FFF4EB"/>
+                <stop offset="100%" stop-color="#FFE8D6"/>
+              </linearGradient>
+            </defs>
+            <circle cx="22" cy="98" r="6" fill="#FF5A00"/>
+            <text x="22" y="101" text-anchor="middle" font-family="Inter" font-size="8" font-weight="700" fill="#fff">✦</text>
+            <text x="34" y="100" font-family="Inter" font-size="7" font-weight="700" fill="#993C1D" letter-spacing="0.3">PULSO IA</text>
+            <text x="14" y="118" font-family="Inter" font-size="7" font-weight="600" fill="#3D2817">Hoy se vendió mejor el Pastor</text>
+            <text x="14" y="128" font-family="Inter" font-size="7" fill="#3D2817">(38 unidades). Mañana revisa</text>
+            <text x="14" y="138" font-family="Inter" font-size="7" fill="#3D2817">tu stock para no quedarte corto.</text>
+            <!-- Bottom -->
+            <text x="10" y="164" font-family="Inter" font-size="6.5" fill="#6B7280">● Equipo: 3 activos    ⚠ 1 alerta</text>
+          </svg>
+        </div>
+        <div class="howto-content">
+          <div class="howto-num">4</div>
+          <h3>Revisa con Pulso IA</h3>
+          <p>Al cierre del día tu asistente te dice cuánto vendiste, qué se movió y qué atender mañana. Sin Excel.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -573,8 +714,9 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
         <ul class="price-features">
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> 1 caja / 1 dispositivo</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Productos ilimitados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Pulso IA básico (resumen diario)</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Reportes básicos</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Modo offline</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Modo offline · Sin comisión por venta</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte por email</li>
         </ul>
       </div>
@@ -587,10 +729,11 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
           <span class="meta-monthly">1 sucursal · Cancela cuando quieras</span>
           <span class="meta-yearly">$2,490 al año · 1 sucursal</span>
         </div>
-        <a href="https://play.google.com/store" class="btn btn-primary">Probar 14 días gratis</a>
+        <a href="https://play.google.com/store" class="btn btn-primary">Probar 7 días gratis</a>
         <ul class="price-features">
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Hasta 5 cajas + meseros</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mesas + KDS cocina</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Cajas y meseros ilimitados</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mesas + KDS cocina y barra</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Pulso IA con preguntas libres</li>
           <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Dashboard Web <span class="soon">Próximamente</span></li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Reportes avanzados</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Inventario con food cost</li>
@@ -607,12 +750,13 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
         </div>
         <a href="mailto:ventas@tocaycobra.com.mx" class="btn btn-secondary">Habla con ventas</a>
         <ul class="price-features">
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Todo del plan Profesional</li>
           <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Hasta 3 sucursales <span class="soon">Próximamente</span></li>
           <li class="upcoming"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Comparativas entre sucursales <span class="soon">Próximamente</span></li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Facturación CFDI 4.0</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Mirador — dashboard ejecutivo</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Roles avanzados</li>
-          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Soporte dedicado</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Pulso IA con uso ampliado</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Roles avanzados · Soporte dedicado</li>
         </ul>
       </div>
     </div>
@@ -651,10 +795,10 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand">
-          <div class="brand-icon"><svg viewBox="0 0 60 60" width="28" height="28"><circle cx="30" cy="20" r="3" fill="#fff"/><rect x="28.5" y="22" width="3" height="2" fill="#fff"/><path d="M 14 42 L 14 40 A 16 16 0 0 1 46 40 L 46 42 Z" fill="#fff"/><rect x="11" y="42" width="38" height="3" rx="1.5" fill="#fff"/></svg></div>
-          <span class="brand-name">Toca y Cobra</span>
+          <div class="brand-icon"><svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true"><line x1="20" y1="10" x2="20" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/><line x1="24" y1="8" x2="24" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/><line x1="28" y1="10" x2="28" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/><circle cx="24" cy="15" r="1.5" fill="#fff"/><path d="M11 33a13 13 0 0126 0H11z" fill="#fff"/><rect x="9" y="33" width="30" height="2.6" rx="1.3" fill="#fff"/></svg></div>
+          <span class="brand-name">toca y cobra</span>
         </div>
-        <p>El punto de venta más simple de México. Hecho para que vendas mejor, no para que pierdas tiempo configurando.</p>
+        <p>El punto de venta hecho en México, para México. Para que tu negocio opere como las grandes — sin sus contratos, sin sus comisiones, sin su complejidad.</p>
       </div>
       <div class="footer-col">
         <h4>Producto</h4>
