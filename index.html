@@ -128,11 +128,7 @@ html,body{overflow-x:hidden}
 .tablet-mock{background:var(--charcoal);border-radius:20px;padding:12px;box-shadow:var(--shadow-lg);transform:rotate(-3deg);transition:transform .4s ease;position:relative;z-index:2}
 .tablet-mock:hover{transform:rotate(0deg)}
 .tablet-screen{background:#fff;border-radius:12px;overflow:hidden;aspect-ratio:16/10}
-.printer-mock{position:absolute;left:-28px;bottom:-36px;width:172px;height:128px;z-index:1;display:none;filter:drop-shadow(0 18px 28px rgba(17,24,39,.22))}
-@media (min-width:900px){.printer-mock{display:block}}
-.printer-mock svg{width:100%;height:100%;display:block;transform:rotate(-8deg)}
-.printer-ticket{animation:ticketFeed 4s ease-in-out infinite;transform-origin:center top}
-@keyframes ticketFeed{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+/* Impresora removida del hero — pendiente sección dedicada de hardware */
 
 @media (max-width:900px){.hero{padding:60px 0 80px}.hero-grid{grid-template-columns:1fr;gap:40px}.hero h1{font-size:44px}.hero p.lead{font-size:17px}}
 
@@ -436,9 +432,9 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <div>
         <div class="eyebrow"><span class="eyebrow-dot"></span> Hecho en México · Para México</div>
         <h1>El POS mexicano<br>que <span class="accent">sí entiende</span><br>tu negocio.</h1>
-        <p class="lead" data-biz="resto">Restaurante, tienda o cafetería: cobra desde tu Android con un agente de IA que habla como tú y funciona aunque se caiga el internet. Sin comisión por venta.</p>
-        <p class="lead" data-biz="tienda" style="display:none">Tienda, miscelánea o abarrotes: escanea, cobra y controla inventario desde tu Android. Con un agente de IA que te dice qué se está acabando — y sin comisión por venta.</p>
-        <p class="lead" data-biz="cafe" style="display:none">Café, panadería o servicios: cobra rápido, maneja propinas y recompensa a clientes frecuentes. Con un agente de IA que aprende tu menú y sin comisión por venta.</p>
+        <p class="lead" data-biz="resto">Punto de venta para restaurantes en México. Gestiona mesas, envía comandas a cocina y cobra desde tu Android. Con Pulso IA, modo offline y sin comisión por venta.</p>
+        <p class="lead" data-biz="tienda" style="display:none">Punto de venta para tiendas y abarrotes en México. Escanea, cobra y controla inventario desde tu Android. Con Pulso IA, modo offline y sin comisión por venta.</p>
+        <p class="lead" data-biz="cafe" style="display:none">Punto de venta para cafés y servicios en México. Cobra rápido, gestiona propinas y administra clientes frecuentes. Con Pulso IA, modo offline y sin comisión por venta.</p>
         <div class="hero-ctas">
           <a href="https://play.google.com/store" class="btn btn-primary btn-large">Descargar gratis para Android</a>
           <a href="#howto" class="btn btn-secondary btn-large">Ver cómo funciona (1 min)</a>
@@ -551,42 +547,6 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
             </svg>
           </div>
         </div>
-        <!-- Impresora térmica asomando detrás del tablet -->
-        <div class="printer-mock" aria-hidden="true">
-          <svg viewBox="0 0 172 128" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cuerpo de la impresora -->
-            <rect x="6" y="42" width="160" height="74" rx="10" fill="#F4EDE5" stroke="#D9CCBE" stroke-width="1.2"/>
-            <!-- Sombra inferior del cuerpo -->
-            <rect x="6" y="100" width="160" height="16" rx="10" fill="#E5D8C8"/>
-            <!-- Slot superior naranja por donde sale el papel -->
-            <rect x="22" y="36" width="128" height="14" rx="3" fill="#FF5A00"/>
-            <rect x="22" y="36" width="128" height="3" fill="#E94F00"/>
-            <!-- Ticket de papel saliendo -->
-            <g class="printer-ticket">
-              <rect x="38" y="2" width="96" height="44" rx="2" fill="#FFFFFF" stroke="#EFE4DA" stroke-width="0.8"/>
-              <!-- Líneas de "texto impreso" -->
-              <text x="48" y="12" font-family="Inter" font-size="5" font-weight="700" fill="#111827">TOCA Y COBRA</text>
-              <line x1="48" y1="16" x2="124" y2="16" stroke="#D1C7BC" stroke-width="0.5" stroke-dasharray="1 1"/>
-              <text x="48" y="22" font-family="Inter" font-size="4" fill="#4B5563">2× Producto</text>
-              <text x="124" y="22" text-anchor="end" font-family="Inter" font-size="4" font-weight="600" fill="#111827">$40</text>
-              <text x="48" y="28" font-family="Inter" font-size="4" fill="#4B5563">1× Producto</text>
-              <text x="124" y="28" text-anchor="end" font-family="Inter" font-size="4" font-weight="600" fill="#111827">$25</text>
-              <line x1="48" y1="32" x2="124" y2="32" stroke="#D1C7BC" stroke-width="0.5"/>
-              <text x="48" y="38" font-family="Inter" font-size="4.5" font-weight="700" fill="#111827">TOTAL</text>
-              <text x="124" y="38" text-anchor="end" font-family="Inter" font-size="5" font-weight="700" fill="#FF5A00">$65</text>
-            </g>
-            <!-- LED verde encendido + botón feed -->
-            <circle cx="22" cy="78" r="3" fill="#16A34A"/>
-            <circle cx="22" cy="78" r="5" fill="none" stroke="#16A34A" stroke-width="0.5" opacity="0.4"/>
-            <text x="32" y="80" font-family="Inter" font-size="5" font-weight="600" fill="#6B7280">LISTA</text>
-            <!-- Botón Feed -->
-            <rect x="118" y="72" width="32" height="14" rx="3" fill="#FFFFFF" stroke="#D9CCBE" stroke-width="0.8"/>
-            <text x="134" y="81" text-anchor="middle" font-family="Inter" font-size="5" font-weight="700" fill="#6B7280">FEED</text>
-            <!-- Tornillos decorativos -->
-            <circle cx="14" cy="108" r="1.5" fill="#C9B9A6"/>
-            <circle cx="158" cy="108" r="1.5" fill="#C9B9A6"/>
-          </svg>
-        </div>
       </div>
     </div>
   </div>
@@ -608,7 +568,7 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
   <div class="container">
     <div class="section-header">
       <h2>Las funciones que sí usas.<br>Sin las que te confunden.</h2>
-      <p>Construido con la lógica de los POS grandes, pero sin su complejidad. Cada función está a un toque, en español de aquí.</p>
+      <p>Construido con la lógica de los POS grandes, sin su complejidad. Cada función está a un toque.</p>
     </div>
     <div class="features-grid">
       <div class="feature-card">
@@ -633,9 +593,9 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 19h18M5 19V13M9 19V9M13 19V15M17 19V11M21 19V7" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/><circle cx="9" cy="9" r="1.3" fill="#FF5A00"/><circle cx="17" cy="11" r="1.3" fill="#FF5A00"/><circle cx="21" cy="7" r="1.3" fill="#FF5A00"/></svg></div>
-        <h3>Reportes que Pulso te platica</h3>
-        <p>Ventas por día, semana, mes. Top productos. Productividad por cajero. Comparativas. Y Pulso IA te lo cuenta en español — sin Excel, sin tutoriales de YouTube.</p>
-        <span class="feature-stat">📊 Pulso IA te lee el día</span>
+        <h3>Reportes claros, no gráficas crudas</h3>
+        <p>Ventas por día, semana y mes. Top productos. Productividad por cajero. Comparativas vs período anterior. Pulso IA los resume en lenguaje claro.</p>
+        <span class="feature-stat">📊 Resúmenes ejecutivos con IA</span>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="#FF5A00" stroke-width="1.8"/><circle cx="17" cy="9" r="2.5" stroke="#FF5A00" stroke-width="1.8"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M14 20c0-2.5 1.5-4.5 4-4.5" stroke="#FF5A00" stroke-width="1.8" stroke-linecap="round"/><rect x="7" y="6" width="4" height="2" rx="1" fill="#FF5A00"/></svg></div>
@@ -831,47 +791,47 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
     <div class="pulso-inner">
       <div class="pulso-header">
         <div class="pulso-eyebrow"><span class="pulso-eyebrow-dot"></span> Pulso IA · Exclusivo de Toca y Cobra</div>
-        <h2>Pregúntale a Pulso.<br>Te contesta <em>como compa</em>,<br>no como Excel.</h2>
-        <p>No es una gráfica. No es un dashboard. Es la primera IA de POS que platica contigo en español mexicano sobre cómo va tu negocio — y te dice qué hacer mañana.</p>
+        <h2>Tu analista de negocio,<br>dentro del <em>punto de venta</em>.</h2>
+        <p>Pulso IA es el primer asistente conversacional dentro de un POS mexicano. Pregúntale en lenguaje natural por tus ventas, márgenes o inventario. Ejecuta acciones por ti. Te alerta antes de que algo se vuelva problema.</p>
       </div>
 
       <!-- 3 conversaciones reales (cambian con selector) -->
       <div class="pulso-chats">
-        <!-- Chat 1: Reporte del día -->
+        <!-- Chat 1: Resumen del día -->
         <div class="pulso-chat">
           <div class="pulso-chat-title">
             <div class="pulso-chat-icon">1</div>
-            <span class="pulso-chat-label">Pregúntale el resumen</span>
+            <span class="pulso-chat-label">Resumen del día</span>
           </div>
           <div class="pulso-msg user">
             <div class="pulso-msg-avatar">Tú</div>
-            <div class="pulso-msg-bubble">¿Cómo me fue hoy?</div>
+            <div class="pulso-msg-bubble">¿Cómo cerramos hoy?</div>
           </div>
           <div class="pulso-msg bot">
             <div class="pulso-msg-avatar">✦</div>
-            <div class="pulso-msg-bubble" data-biz="resto">Te fue bien, oye. Vendiste <strong>$4,820</strong> — 18% más que el martes pasado. Lo que más se movió: <strong>tacos al pastor</strong> (32 órdenes). Tip: te quedaste sin coca de 600 a las 8pm. Mañana pide más.</div>
-            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Te fue bien, oye. Vendiste <strong>$3,640</strong> — 12% más que ayer. Lo que más se movió: <strong>Coca 600ml</strong> (84 unidades) y <strong>Sabritas</strong> (52). Fíjate: pan Bimbo se acabó a las 3pm, pide más mañana.</div>
-            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Te fue bien, oye. Vendiste <strong>$2,980</strong> — 9% más que el lunes. Lo que más se movió: <strong>café americano</strong> (48) y <strong>croissant</strong> (22). Las propinas suman <strong>$340</strong> — el barista de la tarde lidera.</div>
+            <div class="pulso-msg-bubble" data-biz="resto">Cierre del día: <strong>$4,820</strong> en ventas, 32 tickets. <strong>+18%</strong> vs el martes anterior. Producto líder: <strong>tacos al pastor</strong> con 32 órdenes. Stock crítico: Coca 600ml agotada a las 20:00. Recomendación: incrementar pedido para mañana.</div>
+            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Cierre del día: <strong>$3,640</strong> en ventas, 87 tickets. <strong>+12%</strong> vs ayer. Productos líderes: <strong>Coca 600ml</strong> (84 unidades) y <strong>Sabritas</strong> (52). Stock crítico: pan Bimbo agotado a las 15:00. Recomendación: revisar reorden.</div>
+            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Cierre del día: <strong>$2,980</strong> en ventas, 64 tickets. <strong>+9%</strong> vs el lunes. Productos líderes: <strong>café americano</strong> (48) y <strong>croissant</strong> (22). Propinas acumuladas: <strong>$340</strong>. Barista con mayor desempeño: turno tarde.</div>
           </div>
         </div>
 
-        <!-- Chat 2: Decisión de negocio -->
+        <!-- Chat 2: Análisis de margen -->
         <div class="pulso-chat">
           <div class="pulso-chat-title">
             <div class="pulso-chat-icon">2</div>
-            <span class="pulso-chat-label">Pídele consejo</span>
+            <span class="pulso-chat-label">Análisis de margen</span>
           </div>
           <div class="pulso-msg user">
             <div class="pulso-msg-avatar">Tú</div>
-            <div class="pulso-msg-bubble" data-biz="resto">¿Qué producto me deja más?</div>
-            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">¿Qué no se ha movido en 2 semanas?</div>
-            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">¿Cuánto llevamos de propinas hoy?</div>
+            <div class="pulso-msg-bubble" data-biz="resto">¿Qué producto deja más utilidad?</div>
+            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">¿Qué productos llevan 2 semanas sin movimiento?</div>
+            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">¿Cómo van las propinas del día?</div>
           </div>
           <div class="pulso-msg bot">
             <div class="pulso-msg-avatar">✦</div>
-            <div class="pulso-msg-bubble" data-biz="resto">El de mejor margen es <strong>café americano</strong>: cuesta $4 hacerlo, lo vendes a $35. Pero el que más dinero te trae al mes es el <strong>sandwich de pollo</strong>: vendes muchos y te dejan $22 cada uno. Si quieres ganar más, sube uno solo de los dos a $40 antes de tocar el resto.</div>
-            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Llevas 14 días sin vender: <strong>Galletas Marías Cuétara</strong> (8 piezas en stock), <strong>Maruchan camarón</strong> (12) y <strong>jabón Zest</strong> (6). Vale la pena bajarlos a $5 menos o regalarlos en combo para liberar caja antes de fin de mes.</div>
-            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Llevas <strong>$340 en propinas</strong> — divididas: turno mañana $120, tarde $220. Si quieres repartirlas parejo o por horas trabajadas, dime y te ayudo a hacer el corte ahorita.</div>
+            <div class="pulso-msg-bubble" data-biz="resto">Mayor margen porcentual: <strong>café americano</strong> ($4 costo / $35 venta = 88%). Mayor utilidad absoluta mensual: <strong>sandwich de pollo</strong> ($22 utilidad × 340 unidades = $7,480). Recomendación: probar incremento de $5 en sandwich antes de modificar otros precios.</div>
+            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">14 días sin movimiento: <strong>Galletas Marías Cuétara</strong> (8 unidades en stock), <strong>Maruchan camarón</strong> (12), <strong>jabón Zest</strong> (6). Capital inmovilizado: $312. Recomendación: descuento del 20% o liquidación en combo antes del cierre de mes.</div>
+            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Propinas del día: <strong>$340</strong>. Distribución: turno mañana $120, turno tarde $220. ¿Aplicar reparto proporcional por horas trabajadas o partes iguales? Puedo procesar el corte ahora.</div>
           </div>
         </div>
 
@@ -879,23 +839,23 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
         <div class="pulso-chat">
           <div class="pulso-chat-title">
             <div class="pulso-chat-icon">3</div>
-            <span class="pulso-chat-label">Te avisa antes</span>
+            <span class="pulso-chat-label">Alerta proactiva</span>
           </div>
           <div class="pulso-msg bot">
             <div class="pulso-msg-avatar">✦</div>
-            <div class="pulso-msg-bubble" data-biz="resto">Fíjate, llevas <strong>3 días seguidos</strong> vendiendo menos en la noche que la semana pasada. ¿Quieres que veamos si fue por algún producto en específico?</div>
-            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Oye, al ritmo de hoy te vas a quedar sin <strong>Coca 600ml mañana antes de las 4pm</strong>. ¿Te paso lista para tu proveedor o lo pides desde aquí?</div>
-            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Llevas <strong>2 horas sin vender ningún postre</strong>. La semana pasada a esta hora ibas en 8 piezas. ¿Reviso si la vitrina se quedó vacía?</div>
+            <div class="pulso-msg-bubble" data-biz="resto">Patrón detectado: <strong>3 días consecutivos</strong> con caída de ventas en horario nocturno vs misma semana anterior. ¿Investigamos por categoría de producto?</div>
+            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Proyección de stock: <strong>Coca 600ml se agotará mañana antes de las 16:00</strong> al ritmo actual de venta. ¿Generar lista de reorden para tu proveedor?</div>
+            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Anomalía detectada: <strong>2 horas sin venta de postres</strong>. Promedio histórico a esta hora: 8 unidades. ¿Verificar inventario en vitrina?</div>
           </div>
           <div class="pulso-msg user">
             <div class="pulso-msg-avatar">Tú</div>
-            <div class="pulso-msg-bubble">Sí, dime.</div>
+            <div class="pulso-msg-bubble">Sí, analiza.</div>
           </div>
           <div class="pulso-msg bot">
             <div class="pulso-msg-avatar">✦</div>
-            <div class="pulso-msg-bubble" data-biz="resto">Bajaron las <strong>hamburguesas un 40%</strong> desde el lunes. ¿Cambiaste algo? ¿Precio, ingrediente, horario?</div>
-            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Necesitas pedir: <strong>12 Cocas 600ml, 4 paquetes de Sabritas, 6 panes Bimbo</strong>. ¿Te lo mando por WhatsApp a tu proveedor?</div>
-            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Confirma que tienes en exhibición: <strong>croissants (vacío hace 1h), galletas (4 piezas) y panqué (sin stock)</strong>. La hora pico empieza en 30 min.</div>
+            <div class="pulso-msg-bubble" data-biz="resto">Causa identificada: <strong>hamburguesas con caída del 40%</strong> desde el lunes. Posibles factores: cambio de precio, ingrediente o disponibilidad. ¿Revisamos historial de cambios?</div>
+            <div class="pulso-msg-bubble" data-biz="tienda" style="display:none">Lista de reorden generada: <strong>12 Coca 600ml, 4 Sabritas, 6 panes Bimbo</strong>. ¿Enviar por WhatsApp a proveedor registrado?</div>
+            <div class="pulso-msg-bubble" data-biz="cafe" style="display:none">Estado actual de vitrina: <strong>croissants agotados desde hace 1h, galletas (4 unidades), panqué sin stock</strong>. Hora pico inicia en 30 minutos. Recomendación: reposición inmediata.</div>
           </div>
         </div>
       </div>
@@ -904,22 +864,22 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
       <div class="pulso-capabilities">
         <div class="pulso-cap">
           <div class="pulso-cap-num">01</div>
-          <h3>Te platica el día</h3>
-          <p>Sin gráficas frías. Sin tutoriales. Le preguntas en español mexicano y te contesta con números reales, productos por nombre y el consejo del día.</p>
+          <h3>Consulta en lenguaje natural</h3>
+          <p>Pregunta por ventas, márgenes, productos o inventario en español. Pulso responde con datos reales del POS, no con gráficas crudas.</p>
         </div>
         <div class="pulso-cap">
           <div class="pulso-cap-num">02</div>
-          <h3>Te hace cosas</h3>
-          <p>"Crea hot dog a $55" — y lo crea. "Da de alta cliente con RFC" — y lo da de alta. Pulso ejecuta acciones, no solo responde preguntas. Tú confirmas, él hace.</p>
+          <h3>Ejecuta acciones</h3>
+          <p>"Crea hot dog a $55" — lo crea. "Da de alta cliente con RFC" — lo registra. Pulso ejecuta operaciones autorizadas dentro del POS. Tú confirmas, el sistema procede.</p>
         </div>
         <div class="pulso-cap">
           <div class="pulso-cap-num">03</div>
-          <h3>Te avisa antes</h3>
-          <p>Si llevas 3 días flojos a esta hora, te avisa. Si te vas a quedar sin Coca, te avisa. Si el cajero anda cancelando raro, te avisa. Como un socio que mira la caja contigo.</p>
+          <h3>Alertas proactivas</h3>
+          <p>Detecta caídas de venta, proyecta agotamiento de stock e identifica anomalías de cajero antes de que se vuelvan problemas. Notifica solo cuando es accionable.</p>
         </div>
       </div>
 
-      <p class="pulso-tagline">"Como tener un compadre que llevó negocio toda su vida sentado junto a la caja —<br><em>viendo todo, avisándote cuando algo no cuadra</em>."</p>
+      <p class="pulso-tagline">Inteligencia operativa dentro del punto de venta.<br><em>Sin dashboards crudos. Sin consultores externos.</em></p>
     </div>
   </div>
 </section>
@@ -1243,11 +1203,11 @@ footer{background:var(--cream-bg);border-top:1px solid var(--divider);padding:60
 <section style="padding:0">
   <div class="container">
     <div class="cta-final">
-      <h2>Tu negocio merece un POS<br>que hable tu idioma.</h2>
-      <p>Sin tarjeta. Sin contratos. Sin comisión por venta. Configura tu primer producto en menos de 60 segundos y empieza a cobrar hoy mismo.</p>
+      <h2>El punto de venta inteligente<br>para el negocio mexicano.</h2>
+      <p>Sin tarjeta. Sin contratos. Sin comisión por venta. Configura tu primer producto en menos de 60 segundos y empieza a operar el mismo día.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
         <a href="https://play.google.com/store" class="btn btn-large">Descargar gratis para Android</a>
-        <a href="https://wa.me/525500000000" class="btn btn-large" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.5)">Hablar con Christofer por WhatsApp</a>
+        <a href="https://wa.me/525500000000" class="btn btn-large" style="background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.5)">Contactar por WhatsApp</a>
       </div>
     </div>
   </div>
