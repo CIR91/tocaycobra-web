@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Toca y Cobra</title>
+<meta name="description" content="Dashboard ejecutivo de Toca y Cobra. Ventas en vivo, equipo, inventario y Pulso IA desde cualquier dispositivo.">
+<link rel="icon" type="image/png" href="/icon_512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --toca-orange:#FF5A00;
+  --toca-orange-deep:#E94F00;
+  --toca-orange-soft:#FFF0E6;
+  --toca-orange-pale:#FFE4D2;
+  --toca-orange-border:#FFD0B8;
+  --warm-bg:#FFF9F4;
+  --cream-bg:#FDF5EF;
+  --surface-white:#FFFFFF;
+  --surface-warm:#FFFCF9;
+  --soft-border:#EFE4DA;
+  --divider:#F3E7DE;
+  --charcoal:#111827;
+  --slate:#4B5563;
+  --muted:#6B7280;
+  --light-gray:#9CA3AF;
+  --success:#16A34A;
+  --success-soft:#EAF7EF;
+  --warning:#F59E0B;
+  --warning-soft:#FFF4DE;
+  --danger:#DC2626;
+  --danger-soft:#FDECEC;
+  --font-sans:'Inter',system-ui,-apple-system,sans-serif;
+  --font-display:'Fraunces','Inter',Georgia,serif;
+  --shadow-sm:0 1px 2px rgba(17,24,39,.04),0 1px 1px rgba(17,24,39,.03);
+  --shadow-md:0 4px 12px rgba(17,24,39,.06),0 2px 4px rgba(17,24,39,.04);
+  --shadow-lg:0 24px 48px -12px rgba(233,79,0,.18),0 8px 16px rgba(17,24,39,.06);
+
+  /* Layout */
+  --sidebar-w:240px;
+  --topbar-h:64px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:var(--font-sans);color:var(--charcoal);background:var(--warm-bg);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ─── Sidebar ─── */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-w);background:var(--surface-white);border-right:1px solid var(--soft-border);display:flex;flex-direction:column;z-index:20}
+.sidebar-brand{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid var(--soft-border)}
+.sidebar-brand-icon{width:32px;height:32px;border-radius:8px;background:var(--toca-orange);display:flex;align-items:center;justify-content:center}
+.sidebar-brand-name{font-family:var(--font-display);font-weight:500;font-size:16px;letter-spacing:-0.01em}
+.sidebar-business{padding:14px 20px;border-bottom:1px solid var(--soft-border);background:var(--cream-bg)}
+.sidebar-business-name{font-size:13px;font-weight:600;color:var(--charcoal);margin-bottom:2px}
+.sidebar-business-meta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.sidebar-business-dot{width:6px;height:6px;border-radius:50%;background:var(--success)}
+.sidebar-nav{flex:1;overflow-y:auto;padding:14px 12px}
+.sidebar-nav-group{margin-bottom:18px}
+.sidebar-nav-label{font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);padding:0 10px 6px}
+.sidebar-link{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;color:var(--slate);font-size:14px;font-weight:500;transition:all .15s;margin-bottom:2px}
+.sidebar-link:hover{background:var(--cream-bg);color:var(--charcoal)}
+.sidebar-link.active{background:var(--toca-orange-soft);color:var(--toca-orange-deep);font-weight:600}
+.sidebar-link.active svg{stroke:var(--toca-orange)}
+.sidebar-link svg{flex-shrink:0;width:18px;height:18px;stroke:var(--muted);stroke-width:1.8}
+.sidebar-link-badge{margin-left:auto;background:var(--toca-orange);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sidebar-footer{padding:14px 16px;border-top:1px solid var(--soft-border);display:flex;align-items:center;gap:10px}
+.sidebar-user-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF8B4D 0%,#FF5A00 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.sidebar-user-info{flex:1;min-width:0}
+.sidebar-user-name{font-size:13px;font-weight:600;color:var(--charcoal);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-user-role{font-size:11px;color:var(--muted)}
+.sidebar-user-menu{color:var(--muted);padding:4px;border-radius:6px}
+.sidebar-user-menu:hover{background:var(--cream-bg);color:var(--charcoal)}
+
+/* ─── Main area ─── */
+.main{margin-left:var(--sidebar-w);min-height:100vh;display:flex;flex-direction:column}
+
+/* ─── Topbar ─── */
+.topbar{height:var(--topbar-h);background:var(--surface-white);border-bottom:1px solid var(--soft-border);display:flex;align-items:center;padding:0 28px;gap:18px;position:sticky;top:0;z-index:15;backdrop-filter:blur(8px)}
+.topbar-title{font-family:var(--font-display);font-size:21px;font-weight:500;letter-spacing:-0.01em;color:var(--charcoal)}
+.topbar-spacer{flex:1}
+.topbar-search{display:flex;align-items:center;gap:8px;background:var(--cream-bg);border:1px solid var(--soft-border);border-radius:10px;padding:8px 14px;width:280px;color:var(--muted);font-size:13px}
+.topbar-search input{flex:1;background:none;border:none;outline:none;font-family:inherit;font-size:13px;color:var(--charcoal)}
+.topbar-icon-btn{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--slate);position:relative;transition:all .15s}
+.topbar-icon-btn:hover{background:var(--cream-bg);color:var(--charcoal)}
+.topbar-icon-badge{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--toca-orange);border:2px solid #fff}
+.topbar-divider{width:1px;height:24px;background:var(--soft-border)}
+
+/* ─── Content ─── */
+.content{padding:28px;flex:1;max-width:1400px;width:100%;margin:0 auto}
+.content-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+.content-greeting h1{font-family:var(--font-display);font-size:32px;font-weight:500;letter-spacing:-0.02em;margin-bottom:6px;color:var(--charcoal)}
+.content-greeting p{color:var(--muted);font-size:14px}
+.content-period{display:flex;align-items:center;gap:8px;background:var(--surface-white);border:1px solid var(--soft-border);border-radius:10px;padding:8px 12px;flex-wrap:wrap}
+.period-chip{padding:6px 12px;border-radius:7px;font-size:13px;font-weight:600;color:var(--slate);cursor:pointer;transition:all .15s}
+.period-chip:hover{color:var(--charcoal)}
+.period-chip.active{background:var(--toca-orange);color:#fff}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
+.kpi-card{background:var(--surface-white);border:1px solid var(--soft-border);border-radius:14px;padding:20px;transition:all .2s}
+.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi-card.featured{background:linear-gradient(135deg,#FFF6EE 0%,#FFEEE0 100%);border:1.5px solid var(--toca-orange-border)}
+.kpi-label{font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.kpi-card.featured .kpi-label{color:var(--toca-orange-deep)}
+.kpi-value{font-family:var(--font-display);font-size:30px;font-weight:500;letter-spacing:-0.02em;color:var(--charcoal);line-height:1;margin-bottom:8px}
+.kpi-delta{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600}
+.kpi-delta.up{color:var(--success)}
+.kpi-delta.down{color:var(--danger)}
+.kpi-meta-bar{margin-top:10px;height:6px;background:var(--cream-bg);border-radius:3px;overflow:hidden}
+.kpi-meta-bar-fill{height:100%;background:var(--toca-orange);border-radius:3px;transition:width .6s ease}
+
+/* Grid 2 cols */
+.grid-2{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin-bottom:24px}
+
+/* Panel cards */
+.panel{background:var(--surface-white);border:1px solid var(--soft-border);border-radius:14px;padding:22px}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.panel-title{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--charcoal);letter-spacing:-0.01em}
+.panel-meta{font-size:12px;color:var(--muted)}
+.panel-action{font-size:13px;color:var(--toca-orange-deep);font-weight:600}
+.panel-action:hover{color:var(--toca-orange)}
+
+/* Sales chart */
+.chart-wrap{position:relative;height:240px}
+.chart-svg{width:100%;height:100%;display:block}
+.chart-legend{display:flex;gap:18px;font-size:12px;color:var(--slate);margin-top:8px}
+.chart-legend-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+/* Top productos list */
+.top-list{display:flex;flex-direction:column;gap:14px}
+.top-row{display:flex;align-items:center;gap:12px}
+.top-rank{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.top-rank-1{background:linear-gradient(135deg,#FF5A00 0%,#E94F00 100%)}
+.top-rank-2{background:#FF8B4D}
+.top-rank-3{background:#FFB380}
+.top-rank-4{background:#D9CCBE;color:var(--charcoal)}
+.top-rank-5{background:#E5D8C8;color:var(--charcoal)}
+.top-info{flex:1;min-width:0}
+.top-name{font-size:14px;font-weight:600;color:var(--charcoal);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.top-units{font-size:12px;color:var(--muted)}
+.top-amount{font-size:14px;font-weight:700;color:var(--charcoal);font-variant-numeric:tabular-nums}
+
+/* Pulso card grande */
+.pulso-card{background:linear-gradient(135deg,#1A1410 0%,#2A1F18 100%);border-radius:14px;padding:24px;color:#fff;position:relative;overflow:hidden}
+.pulso-card::before{content:"";position:absolute;top:-80px;right:-80px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,90,0,0.25) 0%,transparent 60%);filter:blur(40px);pointer-events:none}
+.pulso-card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;position:relative;z-index:1}
+.pulso-card-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#FF5A00 0%,#E94F00 100%);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.pulso-card-label{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:#FFB380}
+.pulso-card-title{font-family:var(--font-display);font-size:18px;font-weight:500;margin-top:2px;color:#fff}
+.pulso-card-msg{font-size:14px;line-height:1.6;color:rgba(255,255,255,0.85);margin-bottom:16px;position:relative;z-index:1}
+.pulso-card-msg strong{color:#FFB380;font-weight:600}
+.pulso-card-actions{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.pulso-action-btn{padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.1);color:#fff;font-size:12px;font-weight:600;transition:all .15s;border:1px solid rgba(255,255,255,0.1)}
+.pulso-action-btn:hover{background:rgba(255,90,0,0.25);border-color:rgba(255,90,0,0.4)}
+.pulso-action-btn.primary{background:var(--toca-orange);border-color:var(--toca-orange)}
+.pulso-action-btn.primary:hover{background:var(--toca-orange-deep);border-color:var(--toca-orange-deep)}
+
+/* Grid 3 cols inferior */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+
+/* Equipo list */
+.team-list{display:flex;flex-direction:column;gap:12px}
+.team-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--divider)}
+.team-row:last-child{border-bottom:none}
+.team-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#FF8B4D 0%,#FF5A00 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0}
+.team-info{flex:1;min-width:0}
+.team-name{font-size:14px;font-weight:600;color:var(--charcoal)}
+.team-role{font-size:12px;color:var(--muted)}
+.team-stat{text-align:right}
+.team-stat-num{font-size:14px;font-weight:700;color:var(--charcoal)}
+.team-stat-label{font-size:11px;color:var(--muted)}
+
+/* Alertas */
+.alert-list{display:flex;flex-direction:column;gap:10px}
+.alert-row{display:flex;align-items:flex-start;gap:10px;padding:12px;border-radius:10px;background:var(--warning-soft);border-left:3px solid var(--warning)}
+.alert-row.danger{background:var(--danger-soft);border-left-color:var(--danger)}
+.alert-row.success{background:var(--success-soft);border-left-color:var(--success)}
+.alert-icon{font-size:16px;flex-shrink:0}
+.alert-msg{flex:1;font-size:13px;line-height:1.5;color:var(--charcoal)}
+.alert-msg strong{font-weight:700}
+.alert-time{font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* Recientes table */
+.recent-table{width:100%;border-collapse:collapse}
+.recent-table th{text-align:left;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--soft-border)}
+.recent-table td{padding:12px 0;border-bottom:1px solid var(--divider);font-size:13px;color:var(--charcoal)}
+.recent-table tr:last-child td{border-bottom:none}
+.recent-ticket{font-weight:600;font-variant-numeric:tabular-nums;color:var(--toca-orange-deep)}
+.recent-time{font-size:12px;color:var(--muted)}
+.recent-method{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;background:var(--cream-bg);font-size:11px;font-weight:600;color:var(--slate)}
+.recent-amount{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+
+/* Responsive */
+@media (max-width:1100px){
+  .grid-2{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}
+}
+@media (max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .3s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .topbar-search{display:none}
+  .content{padding:20px}
+  .content-greeting h1{font-size:24px}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .kpi-value{font-size:24px}
+  .menu-btn{display:flex !important}
+}
+.menu-btn{display:none;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;color:var(--charcoal)}
+</style>
+</head>
+<body>
+
+<!-- ───────────────── SIDEBAR ───────────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">
+      <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true">
+        <line x1="20" y1="10" x2="20" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+        <line x1="24" y1="8" x2="24" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+        <line x1="28" y1="10" x2="28" y2="13" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+        <circle cx="24" cy="15" r="1.5" fill="#fff"/>
+        <path d="M11 33a13 13 0 0126 0H11z" fill="#fff"/>
+        <rect x="9" y="33" width="30" height="2.6" rx="1.3" fill="#fff"/>
+      </svg>
+    </div>
+    <span class="sidebar-brand-name">toca y cobra</span>
+  </div>
+
+  <div class="sidebar-business">
+    <div class="sidebar-business-name">tacos güero</div>
+    <div class="sidebar-business-meta">
+      <span class="sidebar-business-dot"></span>
+      <span>Sucursal Centro · Online</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-group">
+      <div class="sidebar-nav-label">Operación</div>
+      <a href="#" class="sidebar-link active">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Inicio
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 14h4" stroke-linecap="round"/></svg>
+        Ventas
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M5 5h14v14H5z" stroke-linejoin="round"/></svg>
+        Mesas
+        <span class="sidebar-link-badge">8</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M4 4h16v6H4zM4 14h16v6H4z" stroke-linejoin="round"/></svg>
+        Pedidos
+        <span class="sidebar-link-badge">3</span>
+      </a>
+    </div>
+
+    <div class="sidebar-nav-group">
+      <div class="sidebar-nav-label">Inteligencia</div>
+      <a href="#" class="sidebar-link" style="background:rgba(255,90,0,0.06)">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M12 2l2.5 5L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L12 2z" stroke-linejoin="round"/></svg>
+        Pulso IA
+        <span class="sidebar-link-badge">2</span>
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M3 19h18M5 19V13M9 19V9M13 19V15M17 19V11M21 19V7" stroke-linecap="round"/></svg>
+        Reportes
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+        Mirador
+      </a>
+    </div>
+
+    <div class="sidebar-nav-group">
+      <div class="sidebar-nav-label">Catálogo</div>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" stroke-linejoin="round"/></svg>
+        Productos
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 16l9 5 9-5M3 12l9 5 9-5"/></svg>
+        Inventario
+      </a>
+    </div>
+
+    <div class="sidebar-nav-group">
+      <div class="sidebar-nav-label">Negocio</div>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M14 20c0-2.5 1.5-4.5 4-4.5"/></svg>
+        Equipo
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h12" stroke-linecap="round"/></svg>
+        Facturación
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33h.01a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.01a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Ajustes
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user-avatar">A</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">Adrián Morales</div>
+      <div class="sidebar-user-role">Administrador</div>
+    </div>
+    <button class="sidebar-user-menu" aria-label="Menú usuario">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+    </button>
+  </div>
+</aside>
+
+<!-- ───────────────── MAIN ───────────────── -->
+<div class="main">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Menú">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+    <h1 class="topbar-title">Inicio</h1>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-search">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Buscar ventas, productos, equipo…">
+    </div>
+    <button class="topbar-icon-btn" aria-label="Notificaciones">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="topbar-icon-badge"></span>
+    </button>
+    <button class="topbar-icon-btn" aria-label="Pulso IA">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#FF5A00" stroke-width="2"><path d="M12 2l2.5 5L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1L12 2z" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="topbar-divider"></div>
+    <button class="topbar-icon-btn" aria-label="Perfil" style="background:var(--toca-orange);color:#fff;font-weight:700">A</button>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Greeting + period selector -->
+    <div class="content-header">
+      <div class="content-greeting">
+        <h1>Buenas tardes, Adrián</h1>
+        <p>Resumen del día · jueves, 14 de mayo 2026</p>
+      </div>
+      <div class="content-period">
+        <button class="period-chip active">Hoy</button>
+        <button class="period-chip">Ayer</button>
+        <button class="period-chip">7 días</button>
+        <button class="period-chip">Mes</button>
+        <button class="period-chip">Rango</button>
+      </div>
+    </div>
+
+    <!-- KPI grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card featured">
+        <div class="kpi-label">Venta hoy</div>
+        <div class="kpi-value">$24,840</div>
+        <div class="kpi-delta up">▲ +14% vs ayer</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tickets</div>
+        <div class="kpi-value">132</div>
+        <div class="kpi-delta up">▲ +9%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ticket promedio</div>
+        <div class="kpi-value">$188</div>
+        <div class="kpi-delta up">▲ +3%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Meta del día</div>
+        <div class="kpi-value" style="color:var(--toca-orange)">78%</div>
+        <div class="kpi-meta-bar"><div class="kpi-meta-bar-fill" style="width:78%"></div></div>
+      </div>
+    </div>
+
+    <!-- Pulso IA destacado -->
+    <div class="pulso-card" style="margin-bottom:24px">
+      <div class="pulso-card-header">
+        <div class="pulso-card-icon">✦</div>
+        <div>
+          <div class="pulso-card-label">Pulso IA · Resumen ejecutivo</div>
+          <div class="pulso-card-title">Tu día va arriba del promedio</div>
+        </div>
+      </div>
+      <div class="pulso-card-msg">
+        Llevas <strong>$24,840 en ventas</strong> con 132 tickets — <strong>+14%</strong> sobre el martes anterior a esta hora. Producto líder: <strong>tacos al pastor</strong> con 32 órdenes vendidas. Detección: <strong>Coca 600ml proyecta agotamiento</strong> antes de las 20:00 al ritmo actual. Recomendación: incrementar pedido para mañana.
+      </div>
+      <div class="pulso-card-actions">
+        <button class="pulso-action-btn primary">Generar reorden</button>
+        <button class="pulso-action-btn">Ver análisis completo</button>
+        <button class="pulso-action-btn">Preguntar a Pulso</button>
+      </div>
+    </div>
+
+    <!-- Grid 2: Sales chart + Top productos -->
+    <div class="grid-2">
+
+      <!-- Sales chart -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Ventas por hora</div>
+            <div class="panel-meta">Hoy vs. promedio semanal</div>
+          </div>
+          <a href="#" class="panel-action">Ver reporte completo →</a>
+        </div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 700 240" preserveAspectRatio="none" class="chart-svg">
+            <!-- Grid lines -->
+            <g stroke="#F3E7DE" stroke-width="1">
+              <line x1="40" y1="40" x2="700" y2="40"/>
+              <line x1="40" y1="90" x2="700" y2="90"/>
+              <line x1="40" y1="140" x2="700" y2="140"/>
+              <line x1="40" y1="190" x2="700" y2="190"/>
+            </g>
+            <!-- Y axis labels -->
+            <g font-family="Inter" font-size="10" fill="#9CA3AF" text-anchor="end">
+              <text x="34" y="44">$3K</text>
+              <text x="34" y="94">$2K</text>
+              <text x="34" y="144">$1K</text>
+              <text x="34" y="194">$0</text>
+            </g>
+            <!-- Promedio semanal (línea punteada) -->
+            <path d="M 50 170 Q 100 150 160 130 T 280 105 T 400 85 T 520 110 T 650 145" stroke="#D9CCBE" stroke-width="2" stroke-dasharray="4 4" fill="none" stroke-linecap="round"/>
+            <!-- Hoy (línea sólida + área) -->
+            <path d="M 50 180 Q 100 140 160 115 T 280 80 T 400 60 T 520 75 T 650 130" stroke="#FF5A00" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+            <path d="M 50 180 Q 100 140 160 115 T 280 80 T 400 60 T 520 75 T 650 130 L 650 200 L 50 200 Z" fill="url(#chartGrad)" opacity="0.18"/>
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FF5A00"/>
+                <stop offset="100%" stop-color="#FF5A00" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Puntos de datos hoy -->
+            <g fill="#FF5A00">
+              <circle cx="50" cy="180" r="3.5"/>
+              <circle cx="160" cy="115" r="3.5"/>
+              <circle cx="280" cy="80" r="3.5"/>
+              <circle cx="400" cy="60" r="4.5"/>
+              <circle cx="400" cy="60" r="7" fill="none" stroke="#FF5A00" stroke-width="1.5" opacity="0.4"/>
+              <circle cx="520" cy="75" r="3.5"/>
+              <circle cx="650" cy="130" r="3.5"/>
+            </g>
+            <!-- Etiqueta pico -->
+            <rect x="370" y="30" width="60" height="22" rx="6" fill="#111827"/>
+            <text x="400" y="44" font-family="Inter" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">Pico 14:00</text>
+            <path d="M 400 52 L 400 56" stroke="#111827" stroke-width="1.5"/>
+            <!-- X axis labels -->
+            <g font-family="Inter" font-size="10" fill="#9CA3AF" text-anchor="middle">
+              <text x="50" y="218">10am</text>
+              <text x="160" y="218">12pm</text>
+              <text x="280" y="218">2pm</text>
+              <text x="400" y="218">4pm</text>
+              <text x="520" y="218">6pm</text>
+              <text x="650" y="218">8pm</text>
+            </g>
+          </svg>
+        </div>
+        <div class="chart-legend">
+          <span><span class="chart-legend-dot" style="background:#FF5A00"></span> Hoy · $24,840</span>
+          <span><span class="chart-legend-dot" style="background:#D9CCBE"></span> Promedio 7 días · $21,790</span>
+        </div>
+      </div>
+
+      <!-- Top productos -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Top productos</div>
+            <div class="panel-meta">Por unidades vendidas hoy</div>
+          </div>
+        </div>
+        <div class="top-list">
+          <div class="top-row">
+            <div class="top-rank top-rank-1">1</div>
+            <div class="top-info">
+              <div class="top-name">Taco al pastor</div>
+              <div class="top-units">32 unidades</div>
+            </div>
+            <div class="top-amount">$576</div>
+          </div>
+          <div class="top-row">
+            <div class="top-rank top-rank-2">2</div>
+            <div class="top-info">
+              <div class="top-name">Taco suadero</div>
+              <div class="top-units">24 unidades</div>
+            </div>
+            <div class="top-amount">$480</div>
+          </div>
+          <div class="top-row">
+            <div class="top-rank top-rank-3">3</div>
+            <div class="top-info">
+              <div class="top-name">Quesadilla</div>
+              <div class="top-units">18 unidades</div>
+            </div>
+            <div class="top-amount">$432</div>
+          </div>
+          <div class="top-row">
+            <div class="top-rank top-rank-4">4</div>
+            <div class="top-info">
+              <div class="top-name">Coca-Cola 600ml</div>
+              <div class="top-units">42 unidades</div>
+            </div>
+            <div class="top-amount">$924</div>
+          </div>
+          <div class="top-row">
+            <div class="top-rank top-rank-5">5</div>
+            <div class="top-info">
+              <div class="top-name">Horchata vaso</div>
+              <div class="top-units">14 unidades</div>
+            </div>
+            <div class="top-amount">$280</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Grid 3: Equipo / Alertas / Recientes -->
+    <div class="grid-3">
+
+      <!-- Equipo -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Equipo activo</div>
+          <a href="#" class="panel-action">Ver →</a>
+        </div>
+        <div class="team-list">
+          <div class="team-row">
+            <div class="team-avatar">L</div>
+            <div class="team-info">
+              <div class="team-name">Luis Hernández</div>
+              <div class="team-role">Cajero</div>
+            </div>
+            <div class="team-stat">
+              <div class="team-stat-num">$8,420</div>
+              <div class="team-stat-label">42 tickets</div>
+            </div>
+          </div>
+          <div class="team-row">
+            <div class="team-avatar" style="background:linear-gradient(135deg,#7AB8E8 0%,#4A90D0 100%)">M</div>
+            <div class="team-info">
+              <div class="team-name">María Vázquez</div>
+              <div class="team-role">Mesera</div>
+            </div>
+            <div class="team-stat">
+              <div class="team-stat-num">$9,640</div>
+              <div class="team-stat-label">38 tickets</div>
+            </div>
+          </div>
+          <div class="team-row">
+            <div class="team-avatar" style="background:linear-gradient(135deg,#A6D89B 0%,#5DA850 100%)">P</div>
+            <div class="team-info">
+              <div class="team-name">Pedro Ramírez</div>
+              <div class="team-role">Mesero</div>
+            </div>
+            <div class="team-stat">
+              <div class="team-stat-num">$6,780</div>
+              <div class="team-stat-label">52 tickets</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Alertas</div>
+          <span class="panel-meta">3 sin atender</span>
+        </div>
+        <div class="alert-list">
+          <div class="alert-row danger">
+            <span class="alert-icon">⚠</span>
+            <div class="alert-msg"><strong>Coca 600ml</strong> proyecta agotamiento antes de las 20:00.</div>
+          </div>
+          <div class="alert-row">
+            <span class="alert-icon">📦</span>
+            <div class="alert-msg"><strong>3 SKUs</strong> en stock crítico (menos de 5 unidades).</div>
+          </div>
+          <div class="alert-row success">
+            <span class="alert-icon">✓</span>
+            <div class="alert-msg">Meta del día <strong>al 78%</strong> con 4h restantes.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tickets recientes -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Tickets recientes</div>
+          <a href="#" class="panel-action">Ver todos →</a>
+        </div>
+        <table class="recent-table">
+          <thead>
+            <tr>
+              <th>Ticket</th>
+              <th>Hora</th>
+              <th>Pago</th>
+              <th style="text-align:right">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="recent-ticket">#0132</td>
+              <td class="recent-time">15:42</td>
+              <td><span class="recent-method">💵 Efectivo</span></td>
+              <td class="recent-amount">$280</td>
+            </tr>
+            <tr>
+              <td class="recent-ticket">#0131</td>
+              <td class="recent-time">15:38</td>
+              <td><span class="recent-method">💳 Tarjeta</span></td>
+              <td class="recent-amount">$420</td>
+            </tr>
+            <tr>
+              <td class="recent-ticket">#0130</td>
+              <td class="recent-time">15:31</td>
+              <td><span class="recent-method">💵 Efectivo</span></td>
+              <td class="recent-amount">$185</td>
+            </tr>
+            <tr>
+              <td class="recent-ticket">#0129</td>
+              <td class="recent-time">15:24</td>
+              <td><span class="recent-method">📱 Transfer.</span></td>
+              <td class="recent-amount">$640</td>
+            </tr>
+            <tr>
+              <td class="recent-ticket">#0128</td>
+              <td class="recent-time">15:18</td>
+              <td><span class="recent-method">💵 Efectivo</span></td>
+              <td class="recent-amount">$95</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+<script>
+// Period selector
+document.querySelectorAll('.period-chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('.period-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Sidebar active link
+document.querySelectorAll('.sidebar-link').forEach(link=>{
+  link.addEventListener('click',e=>{
+    if(link.getAttribute('href')==='#') e.preventDefault();
+  });
+});
+</script>
+
+</body>
+</html>
